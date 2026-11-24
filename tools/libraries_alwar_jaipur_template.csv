@@ -1,0 +1,2 @@
+query_city,name,osm_type,osm_id,lat,lon,street,housenumber,neighbourhood,city,postcode,phone,fax,email,website,operator,opening_hours,wikidata,wikipedia,description,source
+Example,Example Library (placeholder),node,0,0.000000,0.000000,Example Street,1,Example Neighbourhood,Alwar,000000,+91-0000000000,,info@example.org,http://example.org,Example Operator,Mo-Su 09:00-18:00,Q12345,en:Example,Placeholder entry,OSM

@@ -1,0 +1,61 @@
+import time
+import requests
+import pandas as pd
+
+API_KEY = "YOUR_API_KEY"
+QUERY = "Alwar library"
+BASE_SEARCH = "https://maps.googleapis.com/maps/api/place/textsearch/json"
+BASE_DETAILS = "https://maps.googleapis.com/maps/api/place/details/json"
+
+def text_search(query, api_key, pagetoken=None):
+    params = {"query": query, "key": api_key}
+    if pagetoken:
+        params["pagetoken"] = pagetoken
+    r = requests.get(BASE_SEARCH, params=params)
+    r.raise_for_status()
+    return r.json()
+
+def get_place_details(place_id, api_key, fields=None):
+    params = {"place_id": place_id, "key": api_key}
+    if fields:
+        params["fields"] = ",".join(fields)
+    r = requests.get(BASE_DETAILS, params=params)
+    r.raise_for_status()
+    return r.json()
+
+def collect_places(query, api_key, max_pages=3):
+    places = []
+    resp = text_search(query, api_key)
+    pages = 0
+    while True:
+        pages += 1
+        for p in resp.get("results", []):
+            place = {
+                "place_id": p.get("place_id"),
+                "name": p.get("name"),
+                "address": p.get("formatted_address"),
+                "rating": p.get("rating"),
+                "user_ratings_total": p.get("user_ratings_total"),
+                "lat": p.get("geometry", {}).get("location", {}).get("lat"),
+                "lng": p.get("geometry", {}).get("location", {}).get("lng"),
+            }
+            # Fetch details for phone/website if needed
+            details = get_place_details(place["place_id"], api_key,
+                                        fields=["formatted_phone_number","website"])
+            det = details.get("result", {})
+            place["phone"] = det.get("formatted_phone_number")
+            place["website"] = det.get("website")
+            places.append(place)
+        next_token = resp.get("next_page_token")
+        if not next_token or pages >= max_pages:
+            break
+        # next_page_token may take a short time to become active
+        time.sleep(2)
+        resp = text_search(query, api_key, pagetoken=next_token)
+    return places
+
+if __name__ == "__main__":
+    results = collect_places(QUERY + " Alwar India", API_KEY)
+    df = pd.DataFrame(results)
+    df.to_excel("alwar_libraries.xlsx", index=False)
+    print("Saved", len(df), "rows to alwar_libraries.xlsx")

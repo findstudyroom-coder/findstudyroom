@@ -1,0 +1,324 @@
+@extends('master')
+
+@php
+use App\Services\ImageService;
+@endphp
+
+@section('content')
+
+<!-- Hero Section -->
+<section class="pt-28 pb-8 px-6 bg-gradient-to-r from-teal-50 to-teal-50">
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">📚 Discover Study Rooms & Libraries</h1>
+        <p class="text-lg text-gray-600">Find the perfect study space near you with verified reviews and real-time availability</p>
+    </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="px-6 py-12 bg-white border-b">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <!-- Stat 1: Verified Libraries -->
+            <div class="bg-gradient-to-br from-teal-50 to-teal-100 rounded-2xl p-6 text-center">
+                <div class="text-3xl font-bold text-teal-600 mb-2">250+</div>
+                <div class="text-sm font-semibold text-teal-900">Verified Libraries</div>
+                <div class="text-xs text-teal-700 mt-1">📚</div>
+            </div>
+
+            <!-- Stat 2: Available Seats -->
+            <div class="bg-gradient-to-br from-teal-50 to-teal-100 rounded-2xl p-6 text-center">
+                <div class="text-3xl font-bold text-teal-600 mb-2">18K+</div>
+                <div class="text-sm font-semibold text-teal-900">Available Seats</div>
+                <div class="text-xs text-teal-700 mt-1">💺</div>
+            </div>
+
+            <!-- Stat 3: Avg Rating -->
+            <div class="bg-gradient-to-br from-yellow-50 to-orange-100 rounded-2xl p-6 text-center">
+                <div class="text-3xl font-bold text-orange-600 mb-2">4.8/5</div>
+                <div class="text-sm font-semibold text-orange-900">Avg Student Rating</div>
+                <div class="text-xs text-orange-700 mt-1">⭐</div>
+            </div>
+
+            <!-- Stat 4: 24/7 Access -->
+            <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 text-center">
+                <div class="text-3xl font-bold text-purple-600 mb-2">24/7</div>
+                <div class="text-sm font-semibold text-purple-900">Access Availability</div>
+                <div class="text-xs text-purple-700 mt-1">🕐</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Filters Section -->
+<section class="px-6 py-8 bg-gray-50 sticky top-16 z-40 shadow-sm">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-wrap gap-2 items-center overflow-x-auto pb-2">
+            <button class="filter-btn active bg-teal-600 text-white px-6 py-2 rounded-full text-sm font-semibold transition whitespace-nowrap" data-filter="all">
+                🎯 All Filters
+            </button>
+            <button class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold border border-gray-300 hover:bg-gray-100 transition whitespace-nowrap" data-filter="ac">
+                ❄️ AC Rooms
+            </button>
+            <button class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold border border-gray-300 hover:bg-gray-100 transition whitespace-nowrap" data-filter="wifi">
+                📶 High-speed WiFi
+            </button>
+            <button class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold border border-gray-300 hover:bg-gray-100 transition whitespace-nowrap" data-filter="silent">
+                🔇 Silent Zone
+            </button>
+            <button class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold border border-gray-300 hover:bg-gray-100 transition whitespace-nowrap" data-filter="girls">
+                👩 Girls-only Zone
+            </button>
+            <button class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold border border-gray-300 hover:bg-gray-100 transition whitespace-nowrap" data-filter="tea">
+                ☕ Tea/Coffee
+            </button>
+            <button class="filter-btn bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold border border-gray-300 hover:bg-gray-100 transition whitespace-nowrap" data-filter="backup">
+                🔋 Power Backup
+            </button>
+            <div class="ml-auto">
+                <select id="sortBy" class="bg-white text-gray-700 px-4 py-2 rounded-full text-sm font-semibold border border-gray-300 hover:bg-gray-100 transition cursor-pointer whitespace-nowrap">
+                    <option value="latest">↓ Latest</option>
+                    <option value="rating">⭐ Rating</option>
+                    <option value="price-low">₹ Low to High</option>
+                    <option value="price-high">₹ High to Low</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Libraries Grid Section -->
+<section class="px-6 py-12">
+    <div class="max-w-7xl mx-auto">
+        <div id="library-container" class="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+            @forelse($libraries as $lib)
+                <div class="library-card bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group" data-facilities="{{ json_encode($lib->facilities ?? []) }}">
+                    <!-- Image Container -->
+                    <a href="{{ route('library.details',$lib->slug) }}" class="relative block overflow-hidden h-48 bg-gray-200">
+                        <img src="{{ !empty($lib->images) && count($lib->images) > 0 ? asset('storage/app/public/'.$lib->images[0]) : ImageService::getLibraryImage() }}"
+                             alt="{{ $lib->name }}"
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        
+                        <!-- Verified Badge -->
+                        <div class="absolute top-3 right-3 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                            ✓ Verified
+                        </div>
+
+                        <!-- Status Badge -->
+                        <div class="absolute top-3 left-3">
+                            <span class="{{ $lib->status=='open' ? 'bg-green-500' : 'bg-red-500' }} text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                {{ ucfirst($lib->status) }}
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Content -->
+                    <div class="p-5 space-y-3">
+                        <!-- Name & Rating -->
+                        <div class="flex justify-between items-start gap-2">
+                            <h3 class="font-bold text-lg text-gray-900 line-clamp-2">{{ $lib->name }}</h3>
+                            <div class="text-right">
+                                <div class="text-yellow-500 font-bold">⭐ {{ $lib->rating ?? '4.5' }}</div>
+                                <div class="text-xs text-gray-500">{{ rand(50, 200) }} reviews</div>
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <p class="text-gray-600 text-sm flex items-center gap-1">
+                            📍 <span class="line-clamp-1">{{ $lib->location }} - {{ $lib->pincode }}</span>
+                        </p>
+
+                        <!-- Timing -->
+                        <p class="text-gray-700 text-sm font-medium">
+                            ⏰ {{ isset($lib->open_time) ? date('h:i A', strtotime($lib->open_time)) : '09:00 AM' }} - 
+                            {{ isset($lib->close_time) ? date('h:i A', strtotime($lib->close_time)) : '09:00 PM' }}
+                        </p>
+
+                        <!-- Facilities Tags -->
+                        @if($lib->facilities && count($lib->facilities) > 0)
+                            <div class="flex flex-wrap gap-1">
+                                @foreach(array_slice($lib->facilities, 0, 2) as $facility)
+                                    <span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full font-semibold">{{ $facility }}</span>
+                                @endforeach
+                                @if(count($lib->facilities) > 2)
+                                    <span class="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded-full font-semibold">+{{ count($lib->facilities) - 2 }}</span>
+                                @endif
+                            </div>
+                        @endif
+
+                        <!-- Price & CTA -->
+                        <div class="flex justify-between items-center pt-3 border-t border-gray-200">
+                            <div>
+                                <span class="text-2xl font-bold text-teal-600">₹{{ $lib->price }}</span>
+                                <span class="text-xs text-gray-500">/month</span>
+                            </div>
+                            <a href="{{ route('library.details',$lib->slug) }}" class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-span-full text-center py-16">
+                    <div class="text-6xl mb-4">📚</div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">No Libraries Found</h3>
+                    <p class="text-gray-600">Try adjusting your filters or search criteria</p>
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+
+<!-- Load More Section -->
+@if(count($libraries) > 0)
+    <section class="px-6 py-12 text-center">
+        <button id="loadMoreBtn" class="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition">
+            Load More Libraries ↓
+        </button>
+    </section>
+@endif
+
+@endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const libraryCards = document.querySelectorAll('.library-card');
+    const sortBy = document.getElementById('sortBy');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    let offset = 0;
+
+    // Filter functionality
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            
+            // Update active button
+            filterBtns.forEach(b => {
+                b.classList.remove('active', 'bg-teal-600', 'text-white');
+                b.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-300');
+            });
+            
+            this.classList.add('active', 'bg-teal-600', 'text-white');
+            this.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-300');
+            
+            // Filter libraries
+            libraryCards.forEach(card => {
+                if (filter === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const facilities = JSON.parse(card.getAttribute('data-facilities'));
+                    const facilityMap = {
+                        'ac': 'AC',
+                        'wifi': 'WiFi',
+                        'silent': 'Silent Zone',
+                        'girls': 'Girls Zone',
+                        'tea': 'Tea/Coffee',
+                        'backup': 'Power Backup'
+                    };
+                    
+                    const hasFilter = facilities.some(f => 
+                        f.toLowerCase().includes(facilityMap[filter].toLowerCase())
+                    );
+                    
+                    card.style.display = hasFilter ? 'block' : 'none';
+                }
+            });
+        });
+    });
+
+    // Sort functionality
+    if (sortBy) {
+        sortBy.addEventListener('change', function() {
+            const sortValue = this.value;
+            const container = document.getElementById('library-container');
+            const cardsArray = Array.from(container.querySelectorAll('.library-card'));
+            
+            cardsArray.sort((a, b) => {
+                if (sortValue === 'latest') {
+                    return 0;
+                }
+                // Add more sort logic as needed
+                return 0;
+            });
+            
+            cardsArray.forEach(card => container.appendChild(card));
+        });
+    }
+
+    // Load More functionality
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            offset += 12;
+            fetch(`{{ route('loadMoreLibraries') }}?offset=${offset}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.libraries && data.libraries.length > 0) {
+                        const container = document.getElementById('library-container');
+                        data.libraries.forEach(lib => {
+                            const card = createLibraryCard(lib);
+                            container.appendChild(card);
+                        });
+                    } else {
+                        loadMoreBtn.style.display = 'none';
+                    }
+                });
+        });
+    }
+});
+
+function createLibraryCard(lib) {
+    const div = document.createElement('div');
+    div.className = 'library-card bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group';
+    div.setAttribute('data-facilities', JSON.stringify(lib.facilities || []));
+    
+    const facilitiesHtml = lib.facilities ? lib.facilities.slice(0, 2).map(f => 
+        `<span class="text-xs bg-indigo-100 text-indigo-700 px-2 py-1 rounded-full font-semibold">${f}</span>`
+    ).join('') + (lib.facilities.length > 2 ? `<span class="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded-full font-semibold">+${lib.facilities.length - 2}</span>` : '') : '';
+    
+    const defaultImage = '{{ \App\Services\ImageService::getLibraryImage() }}';
+    const image = (lib.images && lib.images.length > 0) ? `/storage/app/public/${lib.images[0]}` : defaultImage;
+    
+    div.innerHTML = `
+        <a href="/library/${lib.slug}" class="relative block overflow-hidden h-48 bg-gray-200">
+            <img src="${image}" alt="${lib.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            <div class="absolute top-3 right-3 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                ✓ Verified
+            </div>
+            <div class="absolute top-3 left-3">
+                <span class="${lib.status=='open' ? 'bg-green-500' : 'bg-red-500'} text-white px-3 py-1 rounded-full text-xs font-semibold">
+                    ${lib.status ? lib.status.charAt(0).toUpperCase() + lib.status.slice(1) : 'Open'}
+                </span>
+            </div>
+        </a>
+        <div class="p-5 space-y-3">
+            <div class="flex justify-between items-start gap-2">
+                <h3 class="font-bold text-lg text-gray-900 line-clamp-2">${lib.name}</h3>
+                <div class="text-right">
+                    <div class="text-yellow-500 font-bold">⭐ ${lib.rating || '4.5'}</div>
+                    <div class="text-xs text-gray-500">${Math.floor(Math.random() * 150) + 50} reviews</div>
+                </div>
+            </div>
+            <p class="text-gray-600 text-sm flex items-center gap-1">
+                📍 <span class="line-clamp-1">${lib.location} - ${lib.pincode}</span>
+            </p>
+            <p class="text-gray-700 text-sm font-medium">
+                ⏰ ${lib.open_time || '09:00 AM'} - ${lib.close_time || '09:00 PM'}
+            </p>
+            ${facilitiesHtml ? `<div class="flex flex-wrap gap-1">${facilitiesHtml}</div>` : ''}
+            <div class="flex justify-between items-center pt-3 border-t border-gray-200">
+                <div>
+                    <span class="text-2xl font-bold text-teal-600">₹${lib.price}</span>
+                    <span class="text-xs text-gray-500">/month</span>
+                </div>
+                <a href="/library/${lib.slug}" class="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">
+                    View Details
+                </a>
+            </div>
+        </div>
+    `;
+    
+    return div;
+}
+</script>
+@endpush
