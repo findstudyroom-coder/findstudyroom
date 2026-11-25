@@ -12,9 +12,11 @@
 <div class="card mb-4" style="background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
     <form method="GET" action="{{ route('call-center.libraries') }}" class="row g-3">
         <div class="col-md-3">
+            <label class="form-label small fw-bold text-muted mb-1">Search Library</label>
             <input type="text" name="search" class="form-control" placeholder="Search by name, mobile..." value="{{ request('search') }}">
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
+            <label class="form-label small fw-bold text-muted mb-1">Call Status</label>
             <select name="status" class="form-control">
                 <option value="">All Statuses</option>
                 <option value="Pending" {{ request('status') == 'Pending' ? 'selected' : '' }}>Pending (Not Called)</option>
@@ -29,23 +31,62 @@
             </select>
         </div>
         <div class="col-md-3">
-            <input type="date" name="follow_up_date" class="form-control" placeholder="Follow up date" value="{{ request('follow_up_date') }}">
+            <label class="form-label small fw-bold text-danger mb-1"><i class="fas fa-fire me-1"></i> Traffic & Leads Filter</label>
+            <select name="lead_filter" class="form-control border-danger" style="font-weight: 500;">
+                <option value="">All Libraries (Any Traffic)</option>
+                <option value="leads_or_visitors" {{ request('lead_filter') == 'leads_or_visitors' ? 'selected' : '' }}>🔥 With Leads OR Visitors (Active Traffic)</option>
+                <option value="has_leads" {{ request('lead_filter') == 'has_leads' ? 'selected' : '' }}>🎯 With Student Leads / Bookings</option>
+                <option value="has_visitors" {{ request('lead_filter') == 'has_visitors' ? 'selected' : '' }}>👁️ With Visitors / Page Views</option>
+                <option value="recent_activity" {{ request('lead_filter') == 'recent_activity' ? 'selected' : '' }}>⚡ Active in Last 7 Days</option>
+                <option value="no_traffic" {{ request('lead_filter') == 'no_traffic' ? 'selected' : '' }}>⚪ No Traffic Yet</option>
+            </select>
         </div>
-        <div class="col-md-3">
-            <button type="submit" class="btn btn-primary">Filter</button>
+        <div class="col-md-2">
+            <label class="form-label small fw-bold text-muted mb-1">Follow-up Date</label>
+            <input type="date" name="follow_up_date" class="form-control" value="{{ request('follow_up_date') }}">
+        </div>
+        <div class="col-md-2 d-flex align-items-end gap-2">
+            <button type="submit" class="btn btn-primary flex-fill">Filter</button>
             <a href="{{ route('call-center.libraries') }}" class="btn btn-secondary">Reset</a>
         </div>
     </form>
 </div>
 
+<!-- Quick Filter Badges -->
+<div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+    <span class="text-muted fw-bold small me-2"><i class="fas fa-filter me-1"></i> Quick Filters:</span>
+    <a href="{{ route('call-center.libraries', array_merge(request()->except('lead_filter', 'page'), ['lead_filter' => 'leads_or_visitors'])) }}" 
+       class="btn btn-sm {{ request('lead_filter') == 'leads_or_visitors' ? 'btn-danger' : 'btn-outline-danger' }} rounded-pill px-3">
+        🔥 With Leads / Visitors ({{ $withTrafficCount ?? 0 }})
+    </a>
+    <a href="{{ route('call-center.libraries', array_merge(request()->except('lead_filter', 'page'), ['lead_filter' => 'has_leads'])) }}" 
+       class="btn btn-sm {{ request('lead_filter') == 'has_leads' ? 'btn-success' : 'btn-outline-success' }} rounded-pill px-3">
+        🎯 Has Leads ({{ $withLeadsCount ?? 0 }})
+    </a>
+    <a href="{{ route('call-center.libraries', array_merge(request()->except('lead_filter', 'page'), ['lead_filter' => 'has_visitors'])) }}" 
+       class="btn btn-sm {{ request('lead_filter') == 'has_visitors' ? 'btn-info text-white' : 'btn-outline-info' }} rounded-pill px-3">
+        👁️ Has Visitors ({{ $withVisitorsCount ?? 0 }})
+    </a>
+    <a href="{{ route('call-center.libraries', array_merge(request()->except('status', 'page'), ['status' => 'Pending'])) }}" 
+       class="btn btn-sm {{ request('status') == 'Pending' ? 'btn-warning text-dark' : 'btn-outline-warning text-dark' }} rounded-pill px-3">
+        ⏳ Pending Calls
+    </a>
+    @if(request('lead_filter') || request('status') || request('search') || request('follow_up_date'))
+    <a href="{{ route('call-center.libraries') }}" class="btn btn-sm btn-link text-secondary text-decoration-none">
+        <i class="fas fa-times me-1"></i> Clear all filters
+    </a>
+    @endif
+</div>
+
 <div class="table-responsive" style="background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped align-middle">
         <thead>
             <tr>
                 <th>Library Name</th>
                 <th>Contact Person</th>
                 <th>Phone Number</th>
                 <th>Location</th>
+                <th>Leads / Visitors</th>
                 <th>Last Call Status</th>
                 <th>Next Follow-up</th>
                 <th>Actions</th>
@@ -54,10 +95,44 @@
         <tbody>
             @forelse($libraries as $library)
             <tr>
-                <td>{{ $library->name }}</td>
+                <td>
+                    <div class="fw-bold">{{ $library->name }}</div>
+                    @if(($library->total_leads ?? 0) > 0)
+                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle mt-1" style="font-size: 11px;">
+                            🔥 High Interest
+                        </span>
+                    @endif
+                </td>
                 <td>{{ $library->contact_person_name ?? 'N/A' }}</td>
-                <td>{{ $library->phone }}</td>
+                <td>
+                    <a href="tel:{{ $library->phone }}" class="text-dark fw-bold text-decoration-none">
+                        {{ $library->phone }}
+                    </a>
+                </td>
                 <td>{{ $library->district->name ?? '' }}, {{ $library->state->name ?? '' }}</td>
+                <td>
+                    <div class="d-flex flex-column gap-1">
+                        @if(($library->total_leads ?? 0) > 0)
+                            <a href="{{ route('library-visitors.index', ['library_id' => $library->id, 'tab' => 'bookings']) }}" 
+                               target="_blank" 
+                               class="badge bg-danger text-white text-decoration-none" 
+                               title="Click to view student leads in Visitors Module">
+                                🎯 {{ $library->total_leads }} {{ \Illuminate\Support\Str::plural('Lead', $library->total_leads) }}
+                            </a>
+                        @endif
+                        @if(($library->total_views ?? 0) > 0)
+                            <a href="{{ route('library-visitors.index', ['library_id' => $library->id, 'tab' => 'visitors']) }}" 
+                               target="_blank" 
+                               class="badge bg-primary text-white text-decoration-none" 
+                               title="Click to view visitor analytics in Visitors Module">
+                                👁️ {{ $library->total_views }} {{ \Illuminate\Support\Str::plural('View', $library->total_views) }}
+                            </a>
+                        @endif
+                        @if(($library->total_leads ?? 0) == 0 && ($library->total_views ?? 0) == 0)
+                            <span class="text-muted small">0 activity</span>
+                        @endif
+                    </div>
+                </td>
                 <td>
                     @if($library->latestCallLog)
                         <span class="badge bg-info text-dark">{{ $library->latestCallLog->status }}</span>

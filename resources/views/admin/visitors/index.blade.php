@@ -275,6 +275,10 @@
     gap: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     margin-bottom: 20px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
 }
 
 .report-tab-btn {
@@ -291,6 +295,8 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .report-tab-btn:hover {
@@ -301,6 +307,35 @@
     color: #38bdf8;
     border-bottom-color: #38bdf8;
     background: rgba(56, 189, 248, 0.05);
+}
+
+/* Custom Total Visits & Unique Badges */
+.badge-visits {
+    background: rgba(56, 189, 248, 0.2) !important;
+    color: #38bdf8 !important;
+    border: 1px solid rgba(56, 189, 248, 0.5) !important;
+    font-size: 14.5px !important;
+    font-weight: 700 !important;
+    padding: 5px 14px !important;
+    border-radius: 8px !important;
+    display: inline-block !important;
+    letter-spacing: 0.3px;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);
+    line-height: 1.2;
+}
+
+.badge-unique {
+    background: rgba(139, 92, 246, 0.2) !important;
+    color: #c084fc !important;
+    border: 1px solid rgba(139, 92, 246, 0.5) !important;
+    font-size: 14.5px !important;
+    font-weight: 700 !important;
+    padding: 5px 14px !important;
+    border-radius: 8px !important;
+    display: inline-block !important;
+    letter-spacing: 0.3px;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.1);
+    line-height: 1.2;
 }
 
 /* Glass Table Container */
@@ -475,7 +510,7 @@
             </div>
             @if(isset($selectedLibrary) && $selectedLibrary)
                 <div class="d-flex align-items-center gap-2 flex-wrap mt-2">
-                    <span class="badge bg-info bg-opacity-25 text-info border border-info border-opacity-50 px-3 py-1 fs-6">
+                    <span class="badge px-3 py-1 fs-6" style="background: rgba(56, 189, 248, 0.18) !important; color: #38bdf8 !important; border: 1px solid rgba(56, 189, 248, 0.45) !important;">
                         <i class="fas fa-building me-1"></i> {{ $selectedLibrary->name }}
                     </span>
                     <span class="text-secondary small">
@@ -769,18 +804,18 @@
 
     <!-- 6. TABS NAVIGATION -->
     <div class="report-tabs">
-        <button type="button" onclick="switchTab('summary')" class="report-tab-btn {{ $activeTab === 'summary' ? 'active' : '' }}">
+        <button type="button" onclick="switchTab('summary')" class="report-tab-btn {{ $activeTab === 'summary' ? 'active' : '' }}" title="Library-wise Visitor Count">
             @if(isset($selectedLibrary) && $selectedLibrary)
-                <i class="fas fa-building"></i> 🏢 {{ $selectedLibrary->name }} Overview
+                <i class="fas fa-building text-info"></i> {{ $selectedLibrary->name }} Overview
             @else
-                <i class="fas fa-building"></i> 🏢 Library-wise Visitor Count (Kis Library Par Kitne Log Aaye) ({{ $librarySummary->total() }})
+                <i class="fas fa-building text-info"></i> Library Summary ({{ $librarySummary->total() }})
             @endif
         </button>
-        <button type="button" onclick="switchTab('visitors')" class="report-tab-btn {{ $activeTab === 'visitors' ? 'active' : '' }}">
-            <i class="fas fa-mouse-pointer"></i> 🖱️ Unique Visitors Log (Alag-Alag IP Visitors) ({{ $visitorLogs->total() }})
+        <button type="button" onclick="switchTab('visitors')" class="report-tab-btn {{ $activeTab === 'visitors' ? 'active' : '' }}" title="Unique Visitors Log (Alag-Alag IP Visitors)">
+            <i class="fas fa-mouse-pointer text-purple" style="color: #c084fc;"></i> Visitors Log ({{ $visitorLogs->total() }})
         </button>
-        <button type="button" onclick="switchTab('interested')" class="report-tab-btn {{ $activeTab === 'interested' ? 'active' : '' }}">
-            <i class="fas fa-user-check"></i> ⭐ Interested Users & Leads (Kitne Log Interested Hain) ({{ $interestedUsers->total() }})
+        <button type="button" onclick="switchTab('interested')" class="report-tab-btn {{ $activeTab === 'interested' ? 'active' : '' }}" title="Interested Users & Leads">
+            <i class="fas fa-user-check text-success"></i> Interested Leads ({{ $interestedUsers->total() }})
         </button>
     </div>
 
@@ -825,12 +860,12 @@
                                 </span>
                             </td>
                             <td class="text-center">
-                                <span class="badge bg-info bg-opacity-20 text-info fs-6 fw-bold px-3 py-1 border border-info border-opacity-30">
+                                <span class="badge-visits" title="Total Visits: {{ number_format($lib->total_clicks) }}">
                                     {{ number_format($lib->total_clicks) }}
                                 </span>
                             </td>
                             <td class="text-center">
-                                <span class="badge bg-purple bg-opacity-20 text-white fs-6 fw-bold px-3 py-1 border border-purple border-opacity-30" style="background:#8b5cf633; border-color:#8b5cf6;">
+                                <span class="badge-unique" title="Unique People: {{ number_format($lib->unique_visitors) }}">
                                     {{ number_format($lib->unique_visitors) }}
                                 </span>
                             </td>
@@ -986,7 +1021,7 @@
                             <td class="text-secondary small font-monospace">
                                 <span class="text-white fw-bold">{{ $log->ip_address ?? '-' }}</span>
                                 @if(($log->visit_frequency ?? 1) > 1)
-                                    <span class="badge bg-info bg-opacity-25 text-info border border-info border-opacity-50 small ms-1" title="This IP visited {{ $log->visit_frequency }} times">
+                                    <span class="badge small ms-1" style="background: rgba(56, 189, 248, 0.18) !important; color: #38bdf8 !important; border: 1px solid rgba(56, 189, 248, 0.45) !important;" title="This IP visited {{ $log->visit_frequency }} times">
                                         {{ $log->visit_frequency }} visits
                                     </span>
                                 @endif
@@ -1270,7 +1305,7 @@ function openLibraryModal(libId, libName) {
                             <tr>
                                 <td class="small text-secondary">${v.time}</td>
                                 <td><strong class="text-white">${v.user_name}</strong><br><span class="small text-secondary">${v.user_contact}</span></td>
-                                <td><span class="badge bg-info bg-opacity-25 text-info">${v.action}</span></td>
+                                <td><span class="badge" style="background: rgba(56, 189, 248, 0.18) !important; color: #38bdf8 !important; border: 1px solid rgba(56, 189, 248, 0.45) !important;">${v.action}</span></td>
                                 <td class="small">${v.device} (${v.browser})</td>
                                 <td class="small text-secondary">${v.referer}</td>
                             </tr>

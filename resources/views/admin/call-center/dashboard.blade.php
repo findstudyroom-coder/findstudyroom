@@ -125,6 +125,20 @@
         <h3>Total Libraries</h3>
         <p>{{ $totalLibraries }}</p>
     </div>
+    <a href="{{ route('call-center.libraries', ['lead_filter' => 'leads_or_visitors']) }}" style="text-decoration: none; color: inherit;">
+        <div class="card" style="border-left-color: #dc3545; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <h3 style="color: #dc3545;">🔥 With Leads / Visitors</h3>
+            <p style="color: #dc3545;">{{ $librariesWithTraffic ?? 0 }}</p>
+            <small style="color: #888;">Active student traffic</small>
+        </div>
+    </a>
+    <a href="{{ route('call-center.libraries', ['lead_filter' => 'has_leads']) }}" style="text-decoration: none; color: inherit;">
+        <div class="card" style="border-left-color: #28a745; transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <h3 style="color: #28a745;">🎯 With Student Leads</h3>
+            <p style="color: #28a745;">{{ $librariesWithLeads ?? 0 }}</p>
+            <small style="color: #888;">Seat bookings</small>
+        </div>
+    </a>
     <div class="card pending">
         <h3>Pending Calls</h3>
         <p>{{ $pendingCount }}</p>

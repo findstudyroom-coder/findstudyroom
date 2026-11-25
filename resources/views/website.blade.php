@@ -147,7 +147,7 @@ $homeDescription = 'Looking for a peaceful study room or expert tutor? Search an
 
       <!-- Badges -->
       <div class="flex flex-wrap gap-3">
-        <span class="rounded-full border border-white/30 bg-white/10 backdrop-blur-md px-4 py-2 text-sm text-white flex items-center gap-2"><svg class="w-4 h-4 text-teal-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Total Libraries</span>
+        <span class="rounded-full border border-white/30 bg-white/10 backdrop-blur-md px-4 py-2 text-sm text-white flex items-center gap-2"><svg class="w-4 h-4 text-teal-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> 1,450+ Study Libraries</span>
         <span class="rounded-full border border-white/30 bg-white/10 backdrop-blur-md px-4 py-2 text-sm text-white flex items-center gap-2"><svg class="w-4 h-4 text-teal-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Top Tutors</span>
         <!-- <span class="rounded-full border border-white/30 bg-white/10 backdrop-blur-md px-4 py-2 text-sm text-white flex items-center gap-2"><svg class="w-4 h-4 text-teal-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Instant Booking</span>
       -->
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <!-- Stats & Filters -->
       @php
           $totalLibrariesCount = \App\Models\Library::count();
-          $totalCitiesCount = \App\Models\District::count() ?: \App\Models\Library::distinct('city_id')->count('city_id');
+          $totalCitiesCount = \App\Models\District::count() ?: \App\Models\Library::whereNotNull('city_id')->distinct('city_id')->count('city_id');
       @endphp
       <section class="bg-white border-y border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <!-- Stats Row -->
           <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
             <div class="text-center">
-              <div class="font-display text-4xl sm:text-5xl font-bold text-teal-600 mb-2">{{ $totalLibrariesCount > 0 ? number_format($totalLibrariesCount) . '+' : '1,450+' }}</div>
+              <div class="font-display text-4xl sm:text-5xl font-bold text-teal-600 mb-2">{{ number_format(max($totalLibrariesCount, 1450)) }}+</div>
               <div class="text-gray-600 font-medium text-sm sm:text-base">Total Libraries</div>
             </div>
             <div class="text-center">
@@ -320,7 +320,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <div class="bg-white p-6 rounded-xl shadow">
       <h3 class="text-xl font-semibold mb-2">Expert Tutors</h3>
-      <p class="text-gray-600">Learn from verified professionals</p>
+      <p class="text-gray-600">Learn from experienced educators</p>
     </div>
 
     <div class="bg-white p-6 rounded-xl shadow">
@@ -464,9 +464,9 @@ document.addEventListener('DOMContentLoaded', function() {
                              class="w-full h-full object-cover group-hover/card:scale-105 transition duration-500">
                     </a>
 
-                    @if($lib->is_verified)
-                        <span class="absolute top-3 left-3 bg-teal-600 text-white text-[10px] font-bold px-2 py-1 rounded-md tracking-wider shadow-md">
-                            VERIFIED
+                    @if($lib->rating && $lib->rating >= 4.5)
+                        <span class="absolute top-3 left-3 bg-teal-600 text-white text-[10px] font-bold px-2 py-1 rounded-md tracking-wider shadow-md uppercase">
+                            POPULAR
                         </span>
                     @endif
 
@@ -661,11 +661,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     html += `<div class="p-3">
                         <div class="text-sm font-semibold text-gray-700 mb-2">Libraries</div>`;
                     data.libraries.forEach(item => {
-                        let verifiedBadge = item.is_verified ? `
-                            <span class="inline-flex items-center justify-center bg-teal-100 text-teal-700 text-[10px] font-bold px-1.5 py-0.5 rounded ml-1 align-middle" title="Verified Premium Library">
-                                <svg class="w-3 h-3 mr-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"></path></svg>
-                                VERIFIED
-                            </span>` : '';
+                        let verifiedBadge = '';
 
                         html += `
                             <a href="/library/${item.slug}" class="block rounded-2xl px-3 py-3 hover:bg-gray-50 transition">

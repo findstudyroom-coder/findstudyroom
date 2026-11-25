@@ -74,10 +74,19 @@ class CallCenterController extends Controller
         $noResponse = $statusCounts->get('No Response', 0);
         $converted = $statusCounts->get('Converted', 0);
 
+        // Libraries with active traffic & leads
+        $trafficQuery = Library::whereIn('id', $assignedLibraryIds);
+        $librariesWithTraffic = (clone $trafficQuery)->where(function($q) {
+            $q->has('bookings')->orHas('views');
+        })->count();
+        $librariesWithLeads = (clone $trafficQuery)->has('bookings')->count();
+        $librariesWithVisitors = (clone $trafficQuery)->has('views')->count();
+
         return view('admin.call-center.dashboard', compact(
             'totalLibraries', 'pendingCount', 'calledCount', 'followUpRequired',
             'interested', 'notInterested', 'callBackLater', 'noResponse', 'converted',
-            'todayTotalCalls', 'todayCompleted', 'todayFollowUps', 'callsToday'
+            'todayTotalCalls', 'todayCompleted', 'todayFollowUps', 'callsToday',
+            'librariesWithTraffic', 'librariesWithLeads', 'librariesWithVisitors'
         ));
     }
 
@@ -89,7 +98,11 @@ class CallCenterController extends Controller
         $user = Auth::user();
         $isSuperAdmin = $user->hasRole('Super Admin');
 
-        $query = Library::with(['district', 'state', 'latestCallLog', 'assignedAdmins']);
+        $query = Library::with(['district', 'state', 'latestCallLog', 'assignedAdmins'])
+            ->withCount([
+                'bookings as total_leads',
+                'views as total_views',
+            ]);
 
         if (!$isSuperAdmin) {
             $query->whereHas('assignedAdmins', function ($q) use ($user) {
@@ -125,9 +138,55 @@ class CallCenterController extends Controller
             });
         }
 
-        $libraries = $query->paginate(15);
+        // Filter by leads / visitors (Active Traffic)
+        if ($request->filled('lead_filter')) {
+            $leadFilter = $request->lead_filter;
+            if ($leadFilter === 'leads_or_visitors') {
+                $query->where(function($q) {
+                    $q->has('bookings')->orHas('views');
+                });
+            } elseif ($leadFilter === 'has_leads') {
+                $query->has('bookings');
+            } elseif ($leadFilter === 'has_visitors') {
+                $query->has('views');
+            } elseif ($leadFilter === 'recent_activity') {
+                $query->where(function($q) {
+                    $q->whereHas('bookings', function($bq) {
+                        $bq->where('created_at', '>=', now()->subDays(7));
+                    })->orWhereHas('views', function($vq) {
+                        $vq->where('created_at', '>=', now()->subDays(7));
+                    });
+                });
+            } elseif ($leadFilter === 'no_traffic') {
+                $query->doesntHave('bookings')->doesntHave('views');
+            }
+        }
 
-        return view('admin.call-center.index', compact('libraries'));
+        // Priority sort when filtering by activity
+        if (in_array($request->lead_filter, ['leads_or_visitors', 'has_leads', 'has_visitors', 'recent_activity'])) {
+            $query->orderByDesc('total_leads')->orderByDesc('total_views');
+        } else {
+            $query->latest();
+        }
+
+        // Quick counts for UI pills
+        $baseTrafficQuery = Library::query();
+        if (!$isSuperAdmin) {
+            $baseTrafficQuery->whereHas('assignedAdmins', function ($q) use ($user) {
+                $q->where('admin_id', $user->id);
+            });
+        }
+        $withTrafficCount = (clone $baseTrafficQuery)->where(function($q) {
+            $q->has('bookings')->orHas('views');
+        })->count();
+        $withLeadsCount = (clone $baseTrafficQuery)->has('bookings')->count();
+        $withVisitorsCount = (clone $baseTrafficQuery)->has('views')->count();
+
+        $libraries = $query->paginate(15)->withQueryString();
+
+        return view('admin.call-center.index', compact(
+            'libraries', 'withTrafficCount', 'withLeadsCount', 'withVisitorsCount'
+        ));
     }
 
     /**
