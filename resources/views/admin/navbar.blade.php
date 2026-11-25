@@ -113,35 +113,28 @@
         </li>
         @endcan
 
-        <li class="has-dropdown {{ request()->routeIs('coachings.*') || request()->routeIs('commando-classes.*') || request()->routeIs('commando-instructors.*') || request()->routeIs('commando-schedules.*') || request()->routeIs('commando-trials.*') ? 'active' : '' }}">
-            <a href="javascript:void(0);" onclick="toggleDropdown('theMovementDropdown', 'theMovementDropdownArrow')" class="dropdown-toggle">
+        @if(auth()->user()->hasRole('Super Admin') || auth()->user()->hasRole('Sub Admin') || auth()->user()->can('commando.view'))
+        <li class="has-dropdown {{ request()->routeIs('commando-classes.*') || request()->routeIs('commando-instructors.*') || request()->routeIs('commando-schedules.*') || request()->routeIs('commando-trials.*') ? 'active' : '' }}">
+            <a href="javascript:void(0);" onclick="toggleDropdown('commandoDropdown', 'commandoDropdownArrow')" class="dropdown-toggle">
                 <span>
-                    <i class="fas fa-graduation-cap" style="color: #f97316;"></i> Coaching Management
+                    <i class="fas fa-fist-raised" style="color: #ef4444;"></i> Commando Classes
                 </span>
-                <i class="fas fa-chevron-down dropdown-icon" id="theMovementDropdownArrow"></i>
+                <i class="fas fa-chevron-down dropdown-icon" id="commandoDropdownArrow"></i>
             </a>
 
-            <ul id="theMovementDropdown" class="dropdown-menu">
-                <li class="{{ request()->routeIs('coachings.index') || request()->routeIs('coachings.edit') ? 'sub-active' : '' }}">
-                    <a href="{{ route('coachings.index') }}">
-                        <i class="fas fa-school"></i> All Coachings
-                    </a>
-                </li>
-                <li class="{{ request()->routeIs('coachings.create') ? 'sub-active' : '' }}">
-                    <a href="{{ route('coachings.create') }}">
-                        <i class="fas fa-plus-circle"></i> Add Coaching
-                    </a>
-                </li>
+            <ul id="commandoDropdown" class="dropdown-menu">
                 <li class="{{ request()->routeIs('commando-classes.index') || request()->routeIs('commando-classes.edit') ? 'sub-active' : '' }}">
                     <a href="{{ route('commando-classes.index') }}">
                         <i class="fas fa-list"></i> Core Disciplines
                     </a>
                 </li>
+                @can('commando.create')
                 <li class="{{ request()->routeIs('commando-classes.create') ? 'sub-active' : '' }}">
                     <a href="{{ route('commando-classes.create') }}">
                         <i class="fas fa-plus-circle"></i> Add Discipline
                     </a>
                 </li>
+                @endcan
                 <li class="{{ request()->routeIs('commando-instructors.*') ? 'sub-active' : '' }}">
                     <a href="{{ route('commando-instructors.index') }}">
                         <i class="fas fa-user-ninja"></i> Master Instructors
@@ -165,11 +158,36 @@
                 </li>
                 <li>
                     <a href="{{ route('the-movement') }}" target="_blank">
-                        <i class="fas fa-external-link-alt" style="color: #f97316;"></i> View The Movement
+                        <i class="fas fa-external-link-alt" style="color: #ef4444;"></i> The Movement Page
                     </a>
                 </li>
             </ul>
         </li>
+        @endif
+
+        @if(auth()->user()->hasRole('Super Admin') || auth()->user()->hasRole('Sub Admin') || auth()->user()->can('coaching.view'))
+        <li class="has-dropdown {{ request()->routeIs('coachings.*') ? 'active' : '' }}">
+            <a href="javascript:void(0);" onclick="toggleDropdown('theMovementDropdown', 'theMovementDropdownArrow')" class="dropdown-toggle">
+                <span>
+                    <i class="fas fa-graduation-cap" style="color: #f97316;"></i> Coaching Management
+                </span>
+                <i class="fas fa-chevron-down dropdown-icon" id="theMovementDropdownArrow"></i>
+            </a>
+
+            <ul id="theMovementDropdown" class="dropdown-menu">
+                <li class="{{ request()->routeIs('coachings.index') || request()->routeIs('coachings.edit') ? 'sub-active' : '' }}">
+                    <a href="{{ route('coachings.index') }}">
+                        <i class="fas fa-school"></i> All Coachings
+                    </a>
+                </li>
+                <li class="{{ request()->routeIs('coachings.create') ? 'sub-active' : '' }}">
+                    <a href="{{ route('coachings.create') }}">
+                        <i class="fas fa-plus-circle"></i> Add Coaching
+                    </a>
+                </li>
+            </ul>
+        </li>
+        @endif
         
         @can('users.view')
         <li class="{{ request()->routeIs('users.*') ? 'active' : '' }}">
@@ -284,6 +302,7 @@ function toggleDropdown(dropdownId, arrowId) {
 window.onload = function () {
     const dropdowns = [
         { menuId: 'theMovementDropdown', arrowId: 'theMovementDropdownArrow' },
+        { menuId: 'commandoDropdown', arrowId: 'commandoDropdownArrow' },
         { menuId: 'locationDropdown', arrowId: 'dropdownArrow' },
         { menuId: 'libraryDropdown', arrowId: 'libraryDropdownArrow' },
         { menuId: 'callCenterDropdown', arrowId: 'callCenterDropdownArrow' }
