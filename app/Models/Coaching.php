@@ -72,4 +72,14 @@ class Coaching extends Model
     {
         return $this->hasMany(CommandoTrial::class, 'coaching_id');
     }
+
+    public function plans()
+    {
+        return $this->hasMany(CommandoPlan::class, 'coaching_id');
+    }
+
+    public function galleries()
+    {
+        return $this->hasMany(CommandoGallery::class, 'coaching_id');
+    }
 }

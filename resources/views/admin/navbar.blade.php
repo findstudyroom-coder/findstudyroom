@@ -114,7 +114,7 @@
         @endcan
 
         @if(auth()->user()->hasRole('Super Admin') || auth()->user()->hasRole('Sub Admin') || auth()->user()->can('commando.view'))
-        <li class="has-dropdown {{ request()->routeIs('commando-classes.*') || request()->routeIs('commando-instructors.*') || request()->routeIs('commando-schedules.*') || request()->routeIs('commando-trials.*') ? 'active' : '' }}">
+        <li class="has-dropdown {{ request()->routeIs('commando-classes.*') || request()->routeIs('commando-instructors.*') || request()->routeIs('commando-schedules.*') || request()->routeIs('commando-plans.*') || request()->routeIs('commando-galleries.*') || request()->routeIs('commando-trials.*') ? 'active' : '' }}">
             <a href="javascript:void(0);" onclick="toggleDropdown('commandoDropdown', 'commandoDropdownArrow')" class="dropdown-toggle">
                 <span>
                     <i class="fas fa-fist-raised" style="color: #ef4444;"></i> Commando Classes
@@ -143,6 +143,16 @@
                 <li class="{{ request()->routeIs('commando-schedules.*') ? 'sub-active' : '' }}">
                     <a href="{{ route('commando-schedules.index') }}">
                         <i class="fas fa-calendar-alt"></i> Weekly Schedule
+                    </a>
+                </li>
+                <li class="{{ request()->routeIs('commando-plans.*') ? 'sub-active' : '' }}">
+                    <a href="{{ route('commando-plans.index') }}">
+                        <i class="fas fa-tags"></i> Membership Plans
+                    </a>
+                </li>
+                <li class="{{ request()->routeIs('commando-galleries.*') ? 'sub-active' : '' }}">
+                    <a href="{{ route('commando-galleries.index') }}">
+                        <i class="fas fa-images"></i> Studio Gallery
                     </a>
                 </li>
                 <li class="{{ request()->routeIs('commando-trials.*') ? 'sub-active' : '' }}">

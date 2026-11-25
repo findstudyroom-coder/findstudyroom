@@ -398,6 +398,14 @@ Route::post('/commando-instructors/{id}/toggle-status', [\App\Http\Controllers\A
 Route::resource('commando-schedules', \App\Http\Controllers\Admin\CommandoScheduleController::class);
 Route::post('/commando-schedules/{id}/toggle-status', [\App\Http\Controllers\Admin\CommandoScheduleController::class, 'toggleStatus'])->name('commando-schedules.toggle-status');
 
+// 📌 Commando Membership Plans CRUD
+Route::resource('commando-plans', \App\Http\Controllers\Admin\CommandoPlanController::class);
+Route::post('/commando-plans/{id}/toggle-status', [\App\Http\Controllers\Admin\CommandoPlanController::class, 'toggleStatus'])->name('commando-plans.toggle-status');
+
+// 📌 Commando Studio Galleries CRUD
+Route::resource('commando-galleries', \App\Http\Controllers\Admin\CommandoGalleryController::class);
+Route::post('/commando-galleries/{id}/toggle-status', [\App\Http\Controllers\Admin\CommandoGalleryController::class, 'toggleStatus'])->name('commando-galleries.toggle-status');
+
 // 📌 Commando Classes Trial Bookings
 Route::get('/commando-trials', [\App\Http\Controllers\Admin\CommandoTrialController::class, 'index'])->name('commando-trials.index');
 Route::post('/commando-trials/{id}/status', [\App\Http\Controllers\Admin\CommandoTrialController::class, 'updateStatus'])->name('commando-trials.updateStatus');

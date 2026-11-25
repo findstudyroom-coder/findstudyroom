@@ -12,16 +12,25 @@ class CommandoGallery extends Model
     protected $table = 'commando_galleries';
 
     protected $fillable = [
+        'coaching_id',
+        'coaching_name',
         'title',
+        'category',
         'image',
         'order_no',
         'status',
     ];
 
     protected $casts = [
+        'coaching_id' => 'integer',
         'status' => 'boolean',
         'order_no' => 'integer',
     ];
+
+    public function coaching()
+    {
+        return $this->belongsTo(Coaching::class, 'coaching_id');
+    }
 
     public function getImageUrlAttribute(): string
     {

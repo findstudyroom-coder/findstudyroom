@@ -12,6 +12,8 @@ class CommandoPlan extends Model
     protected $table = 'commando_plans';
 
     protected $fillable = [
+        'coaching_id',
+        'coaching_name',
         'title',
         'tag',
         'subtitle',
@@ -27,10 +29,16 @@ class CommandoPlan extends Model
     ];
 
     protected $casts = [
+        'coaching_id' => 'integer',
         'is_featured' => 'boolean',
         'status' => 'boolean',
         'order_no' => 'integer',
     ];
+
+    public function coaching()
+    {
+        return $this->belongsTo(Coaching::class, 'coaching_id');
+    }
 
     /**
      * Get features as a clean array

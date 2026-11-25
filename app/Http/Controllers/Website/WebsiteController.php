@@ -444,8 +444,25 @@ public function about()
             })
             ->orderBy('order_no', 'asc')->get();
 
-        $plans = \App\Models\CommandoPlan::where('status', 1)->orderBy('order_no', 'asc')->get();
-        $galleries = \App\Models\CommandoGallery::where('status', 1)->orderBy('order_no', 'asc')->get();
+        $plans = \App\Models\CommandoPlan::where('status', 1)
+            ->where(function($q) use ($coachingId, $coachingName) {
+                $q->where('coaching_id', $coachingId)->orWhere('coaching_name', $coachingName);
+            })
+            ->orderBy('order_no', 'asc')->get();
+
+        if ($plans->isEmpty()) {
+            $plans = \App\Models\CommandoPlan::where('status', 1)->orderBy('order_no', 'asc')->get();
+        }
+
+        $galleries = \App\Models\CommandoGallery::where('status', 1)
+            ->where(function($q) use ($coachingId, $coachingName) {
+                $q->where('coaching_id', $coachingId)->orWhere('coaching_name', $coachingName);
+            })
+            ->orderBy('order_no', 'asc')->get();
+
+        if ($galleries->isEmpty()) {
+            $galleries = \App\Models\CommandoGallery::where('status', 1)->orderBy('order_no', 'asc')->get();
+        }
 
         return view('the-movement', compact('commandoClasses', 'instructors', 'schedules', 'plans', 'galleries', 'coaching'));
     }

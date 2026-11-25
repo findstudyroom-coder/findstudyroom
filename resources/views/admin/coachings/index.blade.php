@@ -96,8 +96,18 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('commando-plans.index') }}">
+                <i class="fas fa-tags text-warning me-1"></i> Membership Plans
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('commando-galleries.index') }}">
+                <i class="fas fa-images text-warning me-1"></i> Studio Gallery
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('commando-trials.index') }}">
-                <i class="fas fa-user-check text-info me-1"></i> Trial Bookings &amp; Inquiries
+                <i class="fas fa-user-check text-info me-1"></i> Trial Bookings
             </a>
         </li>
     </ul>
@@ -281,6 +291,12 @@
                                 </a>
                                 <a href="{{ route('commando-schedules.index', ['coaching_id' => $coaching->id]) }}" class="badge bg-info bg-opacity-25 text-light border border-info border-opacity-50 text-decoration-none py-1.5 px-2 text-start" title="Manage Weekly Schedule">
                                     <i class="fas fa-calendar-alt me-1"></i> Schedule: <strong class="text-white">{{ $coaching->schedules_count ?? 0 }} days</strong>
+                                </a>
+                                <a href="{{ route('commando-plans.index', ['coaching_id' => $coaching->id]) }}" class="badge bg-secondary bg-opacity-50 text-warning border border-warning border-opacity-50 text-decoration-none py-1 px-2 text-start" title="Manage Membership Plans">
+                                    <i class="fas fa-tags me-1"></i> Plans: <strong class="text-white">{{ $coaching->plans_count ?? 0 }}</strong>
+                                </a>
+                                <a href="{{ route('commando-galleries.index', ['coaching_id' => $coaching->id]) }}" class="badge bg-secondary bg-opacity-50 text-info border border-info border-opacity-50 text-decoration-none py-1 px-2 text-start" title="Manage Studio Gallery">
+                                    <i class="fas fa-images me-1"></i> Gallery: <strong class="text-white">{{ $coaching->galleries_count ?? 0 }}</strong>
                                 </a>
                                 <a href="{{ route('commando-trials.index', ['coaching_id' => $coaching->id]) }}" class="badge bg-success bg-opacity-25 text-emerald border border-success border-opacity-50 text-decoration-none py-1 px-2 text-start" title="View Trial Inquiries" style="color: #4ade80;">
                                     <i class="fas fa-user-check me-1"></i> Inquiries: <strong class="text-white">{{ $coaching->trials_count ?? 0 }}</strong>

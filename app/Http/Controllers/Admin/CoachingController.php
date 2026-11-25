@@ -21,7 +21,7 @@ class CoachingController extends Controller
             'cities'   => Coaching::whereNotNull('city')->where('city', '!=', '')->distinct('city')->count('city'),
         ];
 
-        $query = Coaching::withCount(['classes', 'instructors', 'schedules', 'trials']);
+        $query = Coaching::withCount(['classes', 'instructors', 'schedules', 'trials', 'plans', 'galleries']);
 
         // Search filter
         if ($request->filled('search')) {

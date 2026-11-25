@@ -111,8 +111,18 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="{{ route('commando-plans.index') }}">
+                <i class="fas fa-tags text-warning me-1"></i> Membership Plans
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('commando-galleries.index') }}">
+                <i class="fas fa-images text-warning me-1"></i> Studio Gallery
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="{{ route('commando-trials.index') }}">
-                <i class="fas fa-user-check text-info me-1"></i> Trial Bookings &amp; Inquiries
+                <i class="fas fa-user-check text-info me-1"></i> Trial Bookings
             </a>
         </li>
     </ul>

@@ -624,7 +624,7 @@
 
             <!-- 6. MEMBERSHIP TIERS (Dynamic) -->
             @php
-                if (!isset($plans) || $plans->isEmpty()) {
+                if (!isset($plans)) {
                     $plans = \App\Models\CommandoPlan::where('status', 1)->orderBy('order_no', 'asc')->get();
                 }
             @endphp
@@ -728,7 +728,7 @@
 
             <!-- 7. STUDIO MOMENTS (INSTAGRAM GALLERY GRID - Dynamic) -->
             @php
-                if (!isset($galleries) || $galleries->isEmpty()) {
+                if (!isset($galleries)) {
                     $galleries = \App\Models\CommandoGallery::where('status', 1)->orderBy('order_no', 'asc')->get();
                 }
             @endphp
