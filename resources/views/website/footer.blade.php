@@ -47,7 +47,7 @@
             <li>
               <a href="{{ route('offer') }}" class="hover:text-white transition-colors flex items-center gap-1.5">
                 <span class="text-orange-400">⚡</span>
-                <span>Special ₹299 Listing Offer</span>
+                <span>Special ₹499 Listing Offer</span>
               </a>
             </li>
             <!--<li><a href="{{ route('tutors.all') }}" class="hover:text-white transition-colors">All Tutors</a></li>-->

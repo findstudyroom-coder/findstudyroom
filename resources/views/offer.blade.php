@@ -1,12 +1,12 @@
 @extends('master')
 
-@section('title', 'Special ₹299 Library Owner Listing Offer | FindStudyRoom')
-@section('meta_description', 'Full karein apni library ke khali desks! List your library on FindStudyRoom for just ₹299. Reach 1,000+ serious students across India with verified trust badge, Google discoverability, and 1-Year library management software.')
-@section('meta_keywords', 'library listing offer, list study room, library owners ₹299, study hall promotion, FindStudyRoom offer, library management app')
-@section('og_title', 'Special ₹299 Library Owner Listing Offer | FindStudyRoom')
-@section('og_description', 'Showcase your library to thousands of serious aspirants. ₹299 introductory offer includes 1-Year software, verified badge, and Google discoverability.')
+@section('title', 'Special ₹499 Library Owner Listing Offer | FindStudyRoom')
+@section('meta_description', 'Full karein apni library ke khali desks! List your library on FindStudyRoom for just ₹499. Reach 1,000+ serious students across India with verified trust badge, Google discoverability, and 1-Year library management software.')
+@section('meta_keywords', 'library listing offer, list study room, library owners ₹499, study hall promotion, FindStudyRoom offer, library management app')
+@section('og_title', 'Special ₹499 Library Owner Listing Offer | FindStudyRoom')
+@section('og_description', 'Showcase your library to thousands of serious aspirants. ₹499 introductory offer includes 1-Year software, verified badge, and Google discoverability.')
 @section('og_image', asset('public/uploads/offer-hero-library.jpg'))
-@section('twitter_title', 'Special ₹299 Library Owner Listing Offer | FindStudyRoom')
+@section('twitter_title', 'Special ₹499 Library Owner Listing Offer | FindStudyRoom')
 @section('twitter_description', 'Showcase your library to thousands of serious aspirants with FindStudyRoom.')
 
 @push('head')
@@ -158,7 +158,7 @@
     <div class="max-w-[1240px] mx-auto flex items-center justify-between flex-wrap gap-2 text-xs sm:text-sm font-semibold">
       <div class="flex items-center gap-2">
         <span class="material-symbols-outlined text-white text-base animate-pulse">bolt</span>
-        <span>⚡ <strong>Special Introductory Window:</strong> List your library across India for just <span class="bg-white text-orange-700 px-2 py-0.5 rounded-full text-xs sm:text-sm font-extrabold shadow-sm">₹299</span> (Save ₹2,700 today!)</span>
+        <span>⚡ <strong>Special Introductory Window:</strong> List your library across India for just <span class="bg-white text-orange-700 px-2 py-0.5 rounded-full text-xs sm:text-sm font-extrabold shadow-sm">₹499</span> (Save ₹2,700 today!)</span>
       </div>
       <div class="flex items-center gap-3">
         <!-- Live Countdown display -->
@@ -169,7 +169,7 @@
           <span id="countdownMins">38</span>m :
           <span id="countdownSecs">45</span>s
         </div>
-        <a href="https://wa.me/918386992953?text=Hi%20FindStudyRoom%20team!%20I%20want%20to%20list%20my%20library%20under%20the%20%E2%82%B9299%20introductory%20offer.%20Please%20share%20the%20package%20details." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-white text-orange-700 hover:bg-orange-50 px-3 py-1 rounded-full text-xs font-extrabold shadow-sm transition-transform hover:scale-105">
+        <a href="https://wa.me/918386992953?text=Hi%20FindStudyRoom%20team!%20I%20want%20to%20list%20my%20library%20under%20the%20%E2%82%B9499%20introductory%20offer.%20Please%20share%20the%20package%20details." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 bg-white text-orange-700 hover:bg-orange-50 px-3 py-1 rounded-full text-xs font-extrabold shadow-sm transition-transform hover:scale-105">
           <span>Claim on WhatsApp</span>
           <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
         </a>
@@ -216,7 +216,7 @@
           <div class="bg-white rounded-2xl p-6 sm:p-7 shadow-sm border border-slate-200/90 border-l-[6px] border-l-emerald-600 space-y-3 relative overflow-hidden">
             <div class="flex flex-wrap items-baseline gap-3">
               <span class="text-xl text-slate-400 line-through font-semibold">₹2,999</span>
-              <span class="text-4xl sm:text-5xl font-black text-emerald-700 tracking-tight">₹299</span>
+              <span class="text-4xl sm:text-5xl font-black text-emerald-700 tracking-tight">₹499</span>
               <span class="bg-amber-100 text-amber-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wide border border-amber-200">
                 90% OFF • Full 1-Year Access
               </span>
@@ -228,7 +228,7 @@
 
           <!-- Action Buttons -->
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
-            <a href="https://wa.me/918386992953?text=Hi%20FindStudyRoom%20team!%20I%20want%20to%20list%20my%20library%20under%20the%20%E2%82%B9299%20introductory%20offer.%20Please%20share%20the%20package%20details%20and%20registration%20process." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2.5 bg-emerald-700 hover:bg-emerald-800 text-white px-7 py-4 rounded-xl text-base font-bold shadow-lg shadow-emerald-700/25 hover:shadow-xl transition-all transform hover:-translate-y-0.5">
+            <a href="https://wa.me/918386992953?text=Hi%20FindStudyRoom%20team!%20I%20want%20to%20list%20my%20library%20under%20the%20%E2%82%B9499%20introductory%20offer.%20Please%20share%20the%20package%20details%20and%20registration%20process." target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2.5 bg-emerald-700 hover:bg-emerald-800 text-white px-7 py-4 rounded-xl text-base font-bold shadow-lg shadow-emerald-700/25 hover:shadow-xl transition-all transform hover:-translate-y-0.5">
               <span class="material-symbols-outlined text-[24px]">chat</span>
               <span>List Your Library — Enquire on WhatsApp</span>
             </a>
@@ -308,7 +308,7 @@
           Aapki Library: Pehle vs FindStudyRoom Ke Sath
         </h2>
         <p class="text-sm sm:text-base text-slate-600">
-          Dekhein kaise sirf ₹299 aapki poori library operations aur student admissions ko transform kar deta hai.
+          Dekhein kaise sirf ₹499 aapki poori library operations aur student admissions ko transform kar deta hai.
         </p>
       </div>
 
@@ -395,7 +395,7 @@
             </h2>
             <div class="space-y-2.5 text-xs sm:text-sm text-slate-300" style="color: #cbd5e1 !important;">
               <p>• Aapki 1 Seat Ki Monthly Fee = <strong>₹1,000 – ₹1,500</strong></p>
-              <p>• FindStudyRoom 1-Year Membership Cost = <strong>Sirf ₹299 (Ek Baar)</strong></p>
+              <p>• FindStudyRoom 1-Year Membership Cost = <strong>Sirf ₹499 (Ek Baar)</strong></p>
               <p class="font-bold text-sm sm:text-base pt-1" style="color: #6ee7b7 !important;">
                 👉 Pehle hi mahine me aapki investment 400% se zyada recover ho jayegi! Baki poore 335 dino ke sabhi admissions ka munafa 100% aapka.
               </p>
@@ -406,11 +406,11 @@
             <p class="text-xs font-bold uppercase tracking-wider text-slate-300" style="color: #cbd5e1;">Real Package Value</p>
             <div class="space-y-1">
               <p class="text-xs line-through" style="color: #94a3b8;">Total Market Value: ₹6,900</p>
-              <p class="text-4xl sm:text-5xl font-black" style="color: #34d399;">₹299</p>
+              <p class="text-4xl sm:text-5xl font-black" style="color: #34d399;">₹499</p>
               <p class="text-xs font-semibold" style="color: #fcd34d;">Valid for Full 365 Days</p>
             </div>
-            <a href="https://wa.me/918386992953?text=Hi%20FindStudyRoom%20team!%20I%20want%20to%20list%20my%20library%20under%20the%20%E2%82%B9299%20introductory%20offer.%20Please%20share%20the%20package%20details." target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3.5 px-5 rounded-xl text-sm transition-all shadow-lg hover:shadow-emerald-500/30" style="background-color: #10b981; color: #020617;">
-              <span>Lock ₹299 Offer on WhatsApp</span>
+            <a href="https://wa.me/918386992953?text=Hi%20FindStudyRoom%20team!%20I%20want%20to%20list%20my%20library%20under%20the%20%E2%82%B9499%20introductory%20offer.%20Please%20share%20the%20package%20details." target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-3.5 px-5 rounded-xl text-sm transition-all shadow-lg hover:shadow-emerald-500/30" style="background-color: #10b981; color: #020617;">
+              <span>Lock ₹499 Offer on WhatsApp</span>
               <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
             </a>
           </div>
@@ -431,7 +431,7 @@
           Unbeatable Value Bundle (Worth ₹6,900+)
         </span>
         <h2 class="text-3xl sm:text-4xl font-extrabold text-fsr-primary tracking-tight">
-          Everything Included in Your ₹299 Package
+          Everything Included in Your ₹499 Package
         </h2>
         <p class="text-base text-fsr-muted leading-relaxed">
           Har feature transparent aur practical hai. Koi hidden cost ya annual renewal commission nahi.
@@ -455,7 +455,7 @@
           </div>
           <div class="pt-6 border-t border-slate-100 mt-4 flex items-center justify-between">
             <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-1">
-              <span class="material-symbols-outlined text-sm">check_circle</span> Included in ₹299
+              <span class="material-symbols-outlined text-sm">check_circle</span> Included in ₹499
             </span>
           </div>
         </div>
@@ -476,7 +476,7 @@
           </div>
           <div class="pt-6 border-t border-slate-100 mt-4 flex items-center justify-between">
             <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-1">
-              <span class="material-symbols-outlined text-sm">check_circle</span> Included in ₹299
+              <span class="material-symbols-outlined text-sm">check_circle</span> Included in ₹499
             </span>
           </div>
         </div>
@@ -497,7 +497,7 @@
           </div>
           <div class="pt-6 border-t border-slate-100 mt-4 flex items-center justify-between">
             <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-1">
-              <span class="material-symbols-outlined text-sm">check_circle</span> Included in ₹299
+              <span class="material-symbols-outlined text-sm">check_circle</span> Included in ₹499
             </span>
           </div>
         </div>
@@ -518,7 +518,7 @@
           </div>
           <div class="pt-6 border-t border-slate-100 mt-4 flex items-center justify-between">
             <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-1">
-              <span class="material-symbols-outlined text-sm">check_circle</span> Included in ₹299
+              <span class="material-symbols-outlined text-sm">check_circle</span> Included in ₹499
             </span>
           </div>
         </div>
@@ -675,9 +675,9 @@
             </div>
           </div>
           <div class="space-y-2">
-            <h3 class="text-xl font-bold text-fsr-primary">Confirm Package &amp; Pay ₹299</h3>
+            <h3 class="text-xl font-bold text-fsr-primary">Confirm Package &amp; Pay ₹499</h3>
             <p class="text-sm text-slate-600 leading-relaxed">
-              Review your draft page preview prepared by our design desk. Complete the one-time ₹299 introductory onboarding payment securely via official UPI QR or instant link.
+              Review your draft page preview prepared by our design desk. Complete the one-time ₹499 introductory onboarding payment securely via official UPI QR or instant link.
             </p>
           </div>
         </div>
@@ -752,7 +752,7 @@
             ★★★★★
           </div>
           <p class="text-xs sm:text-sm text-slate-700 italic leading-relaxed">
-            "Kota me competition bohot zyada hai. FindStudyRoom ke green verified badge se student aur parents ka trust seedhe ban gaya. ₹299 me 1-Year app milna best deal hai."
+            "Kota me competition bohot zyada hai. FindStudyRoom ke green verified badge se student aur parents ka trust seedhe ban gaya. ₹499 me 1-Year app milna best deal hai."
           </p>
           <div class="pt-2 border-t border-slate-200 flex items-center justify-between text-xs">
             <div>
@@ -818,11 +818,11 @@
           <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-2 shadow-inner">
             <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Pre-filled Message Preview</span>
             <p class="text-xs sm:text-sm text-slate-800 italic leading-relaxed font-mono">
-              "Hi FindStudyRoom team! I want to list my library under the ₹299 introductory offer. Please share the package details and registration process."
+              "Hi FindStudyRoom team! I want to list my library under the ₹499 introductory offer. Please share the package details and registration process."
             </p>
           </div>
 
-          <a href="https://wa.me/918386992953?text=Hi%20FindStudyRoom%20team!%20I%20want%20to%20list%20my%20library%20under%20the%20%E2%82%B9299%20introductory%20offer.%20Please%20share%20the%20package%20details%20and%20registration%20process." target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2.5 bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-4 rounded-xl text-base font-bold transition-all shadow-lg shadow-emerald-700/25 hover:shadow-xl transform hover:-translate-y-0.5">
+          <a href="https://wa.me/918386992953?text=Hi%20FindStudyRoom%20team!%20I%20want%20to%20list%20my%20library%20under%20the%20%E2%82%B9499%20introductory%20offer.%20Please%20share%20the%20package%20details%20and%20registration%20process." target="_blank" rel="noopener noreferrer" class="w-full flex items-center justify-center gap-2.5 bg-emerald-700 hover:bg-emerald-800 text-white px-6 py-4 rounded-xl text-base font-bold transition-all shadow-lg shadow-emerald-700/25 hover:shadow-xl transform hover:-translate-y-0.5">
             <span class="material-symbols-outlined text-[24px]">chat</span>
             <span>Chat Directly on WhatsApp</span>
           </a>
@@ -897,14 +897,14 @@
                 <label class="text-xs font-bold uppercase tracking-wider text-fsr-primary">Applicable Special Offer</label>
                 <div class="bg-slate-50 px-4 py-2.5 rounded-xl flex items-center justify-between border border-slate-200">
                   <span class="text-xs sm:text-sm font-semibold text-slate-800">Introductory Package</span>
-                  <span class="text-base font-extrabold text-emerald-700">₹299 Only</span>
+                  <span class="text-base font-extrabold text-emerald-700">₹499 Only</span>
                 </div>
               </div>
             </div>
 
             <!-- Submit Button with loading state -->
             <button type="submit" id="submitBtn" class="w-full bg-[#001229] hover:bg-slate-900 text-white py-4 px-6 rounded-xl text-base font-bold transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-xl cursor-pointer" style="background-color: #001229 !important; color: #ffffff !important;">
-              <span id="btnText">Submit Enquiry &amp; Lock ₹299 Offer</span>
+              <span id="btnText">Submit Enquiry &amp; Lock ₹499 Offer</span>
               <span id="btnSpinner" class="hidden material-symbols-outlined text-[20px] animate-spin">progress_activity</span>
             </button>
 
@@ -937,7 +937,7 @@
           Frequently Asked Questions
         </h2>
         <p class="text-base text-fsr-muted leading-relaxed">
-          Everything you need to know about our listing policy, terms, and the ₹299 introductory package.
+          Everything you need to know about our listing policy, terms, and the ₹499 introductory package.
         </p>
       </div>
 
@@ -956,7 +956,7 @@
         <!-- FAQ Item 2 -->
         <div class="bg-fsr-surface rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
           <button type="button" class="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 text-fsr-primary font-bold text-base sm:text-lg focus:outline-none cursor-pointer hover:bg-slate-50/80 transition-colors" onclick="toggleFaqAccordion(this)">
-            <span>What exactly is included in the ₹299 package?</span>
+            <span>What exactly is included in the ₹499 package?</span>
             <span class="material-symbols-outlined text-[22px] text-slate-500 faq-icon-rotate shrink-0">expand_more</span>
           </button>
           <div class="faq-body hidden px-5 sm:px-6 pb-6 text-slate-600 text-sm sm:text-base leading-relaxed border-t border-slate-100 pt-3">
@@ -989,7 +989,7 @@
         <!-- FAQ Item 5 -->
         <div class="bg-fsr-surface rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
           <button type="button" class="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 text-fsr-primary font-bold text-base sm:text-lg focus:outline-none cursor-pointer hover:bg-slate-50/80 transition-colors" onclick="toggleFaqAccordion(this)">
-            <span>How do I pay the ₹299 fee?</span>
+            <span>How do I pay the ₹499 fee?</span>
             <span class="material-symbols-outlined text-[22px] text-slate-500 faq-icon-rotate shrink-0">expand_more</span>
           </button>
           <div class="faq-body hidden px-5 sm:px-6 pb-6 text-slate-600 text-sm sm:text-base leading-relaxed border-t border-slate-100 pt-3">
@@ -1011,11 +1011,11 @@
         <!-- FAQ Item 7 -->
         <div class="bg-fsr-surface rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
           <button type="button" class="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 text-fsr-primary font-bold text-base sm:text-lg focus:outline-none cursor-pointer hover:bg-slate-50/80 transition-colors" onclick="toggleFaqAccordion(this)">
-            <span>Are there any recurring monthly charges after paying ₹299?</span>
+            <span>Are there any recurring monthly charges after paying ₹499?</span>
             <span class="material-symbols-outlined text-[22px] text-slate-500 faq-icon-rotate shrink-0">expand_more</span>
           </button>
           <div class="faq-body hidden px-5 sm:px-6 pb-6 text-slate-600 text-sm sm:text-base leading-relaxed border-t border-slate-100 pt-3">
-            <strong>None!</strong> The ₹299 fee is a one-time introductory registration. It covers your full 12 months (365 days) of directory hosting and library owner software access with zero monthly maintenance bills during this period.
+            <strong>None!</strong> The ₹499 fee is a one-time introductory registration. It covers your full 12 months (365 days) of directory hosting and library owner software access with zero monthly maintenance bills during this period.
           </div>
         </div>
       </div>
@@ -1046,9 +1046,9 @@
           </p>
 
           <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="https://wa.me/918386992953?text=Hi%20FindStudyRoom%20team!%20I%20want%20to%20list%20my%20library%20under%20the%20%E2%82%B9299%20introductory%20offer.%20Please%20share%20the%20package%20details%20and%20registration%20process." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl text-base font-bold transition-all shadow-xl shadow-emerald-600/30 transform hover:-translate-y-0.5" style="background-color: #059669; color: #ffffff;">
+            <a href="https://wa.me/918386992953?text=Hi%20FindStudyRoom%20team!%20I%20want%20to%20list%20my%20library%20under%20the%20%E2%82%B9499%20introductory%20offer.%20Please%20share%20the%20package%20details%20and%20registration%20process." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-xl text-base font-bold transition-all shadow-xl shadow-emerald-600/30 transform hover:-translate-y-0.5" style="background-color: #059669; color: #ffffff;">
               <span class="material-symbols-outlined text-[24px]">chat</span>
-              <span>Enquire on WhatsApp — Just ₹299</span>
+              <span>Enquire on WhatsApp — Just ₹499</span>
             </a>
             <a href="#enquiry-form" class="w-full sm:w-auto inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white border border-white/20 px-7 py-4 rounded-xl text-sm font-bold transition-colors" style="background-color: rgba(255, 255, 255, 0.12); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.25);">
               <span>Submit Web Enquiry</span>
@@ -1163,14 +1163,14 @@
       </div>
       <div>
         <p class="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5 flex-wrap">
-          <span>₹299 Library Owner Offer</span>
+          <span>₹499 Library Owner Offer</span>
           <span class="bg-[#25D366]/20 text-[#25D366] text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-[#25D366]/30">Save 90%</span>
         </p>
         <p class="text-[11px] text-slate-300 hidden sm:block">1-Year App + Google SEO + 10 WhatsApp Posters</p>
       </div>
     </div>
     <div class="flex items-center gap-1.5 sm:gap-2">
-      <a href="https://wa.me/918386992953?text=Hi%20FindStudyRoom%20team!%20I%20want%20to%20list%20my%20library%20under%20the%20%E2%82%B9299%20introductory%20offer.%20Please%20share%20the%20package%20details." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-[#25D366] hover:bg-[#20ba59] text-slate-950 font-black px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm transition-all shadow-md shadow-[#25D366]/30 transform hover:scale-105 shrink-0" style="background-color: #25D366 !important; color: #020617 !important;">
+      <a href="https://wa.me/918386992953?text=Hi%20FindStudyRoom%20team!%20I%20want%20to%20list%20my%20library%20under%20the%20%E2%82%B9499%20introductory%20offer.%20Please%20share%20the%20package%20details." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 bg-[#25D366] hover:bg-[#20ba59] text-slate-950 font-black px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm transition-all shadow-md shadow-[#25D366]/30 transform hover:scale-105 shrink-0" style="background-color: #25D366 !important; color: #020617 !important;">
         <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24">
           <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
         </svg>
@@ -1290,7 +1290,7 @@
         body: JSON.stringify({
           name: ownerName,
           phone: mobileNumber,
-          message: `Special ₹299 Offer Enquiry for ${libraryName} in ${city}. Address: ${address}. Capacity: ${seats}`
+          message: `Special ₹499 Offer Enquiry for ${libraryName} in ${city}. Address: ${address}. Capacity: ${seats}`
         })
       }).catch(function(){});
     } catch(e) {}
@@ -1301,7 +1301,7 @@
       successMsg.classList.remove('hidden');
 
       const encodedMsg = encodeURIComponent(
-        `Hi FindStudyRoom team!\n\nI just filled the ₹299 Introductory Offer enquiry form:\n• Name: ${ownerName}\n• Library: ${libraryName}\n• City: ${city}\n• Address: ${address}\n• Desks: ${seats}\n• Phone: ${mobileNumber}\n\nPlease confirm my ₹299 offer slot!`
+        `Hi FindStudyRoom team!\n\nI just filled the ₹499 Introductory Offer enquiry form:\n• Name: ${ownerName}\n• Library: ${libraryName}\n• City: ${city}\n• Address: ${address}\n• Desks: ${seats}\n• Phone: ${mobileNumber}\n\nPlease confirm my ₹499 offer slot!`
       );
 
       setTimeout(() => {
