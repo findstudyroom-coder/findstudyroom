@@ -92,17 +92,23 @@ if ($library->rating) {
         <div class="bg-white p-4 rounded-2xl shadow">
           <img id="mainImage"
                src="{{ !empty($library->images) && count($library->images) > 0 ? asset('storage/app/public/'.$library->images[0]) : ImageService::getLibraryImage() }}"
+               alt="{{ $library->name }} - Study Room in {{ $library->city ?? 'India' }}"
+               title="{{ $library->name }} - Findstudyroom"
                onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'"
-               class="w-full h-80 object-cover rounded-xl">
+               class="w-full h-80 object-cover rounded-xl"
+               loading="lazy">
         </div>
 
         <!-- Thumbnails -->
         <div class="flex gap-3 overflow-x-auto pb-2">
           @foreach($library->images ?? [] as $img)
             <img src="{{ asset('storage/app/public/'.$img) }}"
+                 alt="{{ $library->name }} - Photo {{ $loop->iteration }}"
+                 title="{{ $library->name }} - Gallery Image {{ $loop->iteration }}"
                  onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'"
                  onclick="changeImage('{{ asset('storage/app/public/'.$img) }}')"
-                 class="h-20 w-28 object-cover rounded-lg cursor-pointer border hover:border-teal-500 transition">
+                 class="h-20 w-28 object-cover rounded-lg cursor-pointer border hover:border-teal-500 transition"
+                 loading="lazy">
           @endforeach
         </div>
 

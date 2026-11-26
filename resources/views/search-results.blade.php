@@ -37,7 +37,12 @@ use App\Services\ImageService;
               <a href="{{ route('library.details', $lib->slug) }}" class="group block overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
                 <div class="flex gap-4">
                   <div class="h-32 w-32 flex-shrink-0 overflow-hidden bg-gray-200">
-                    <img src="{{ !empty($lib->images) && count($lib->images) > 0 ? asset('storage/app/public/'.$lib->images[0]) : ImageService::getLibraryImage() }}" onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'" alt="{{ $lib->name }}" class="h-full w-full object-cover group-hover:scale-105 transition" />
+                    <img src="{{ !empty($lib->images) && count($lib->images) > 0 ? asset('storage/app/public/'.$lib->images[0]) : ImageService::getLibraryImage() }}"
+                         onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'"
+                         alt="{{ $lib->name }} - Study Library in {{ $lib->location ?? 'India' }}"
+                         title="{{ $lib->name }} - Findstudyroom"
+                         class="h-full w-full object-cover group-hover:scale-105 transition"
+                         loading="lazy" />
                   </div>
                   <div class="flex flex-col justify-between p-4 flex-1">
                     <div>
@@ -75,7 +80,11 @@ use App\Services\ImageService;
               <a href="{{ url('/tutor/'.$tutor->public_slug) }}" class="group block overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
                 <div class="flex gap-4">
                   <div class="h-32 w-32 flex-shrink-0 overflow-hidden bg-gray-200">
-                    <img src="{{ $tutor->image ? asset('public/uploads/tutors/'.$tutor->image) : ImageService::getTutorImage() }}" alt="{{ $tutor->full_name }}" class="h-full w-full object-cover group-hover:scale-105 transition" />
+                    <img src="{{ $tutor->image ? asset('public/uploads/tutors/'.$tutor->image) : ImageService::getTutorImage() }}"
+                         alt="{{ $tutor->full_name }} - Verified Tutor on Findstudyroom"
+                         title="{{ $tutor->full_name }} - Expert Tutor"
+                         class="h-full w-full object-cover group-hover:scale-105 transition"
+                         loading="lazy" />
                   </div>
                   <div class="flex flex-col justify-between p-4 flex-1">
                     <div>

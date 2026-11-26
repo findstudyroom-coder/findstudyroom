@@ -52,7 +52,11 @@ $privacySchema = [
         </div>
       </div>
       <div class="overflow-hidden rounded-[2rem] shadow-xl">
-        <img src="https://plus.unsplash.com/premium_photo-1677093905933-22469186a34b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJpdmFjeSUyMHBvbGljeXxlbnwwfHwwfHx8MA%3D%3D" alt="Privacy protection" class="h-full w-full object-cover" />
+        <img src="https://plus.unsplash.com/premium_photo-1677093905933-22469186a34b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJpdmFjeSUyMHBvbGljeXxlbnwwfHwwfHx8MA%3D%3D"
+             alt="Privacy Policy and Data Protection"
+             title="Privacy Policy - Findstudyroom"
+             class="h-full w-full object-cover"
+             loading="lazy" />
       </div>
     </div>
 

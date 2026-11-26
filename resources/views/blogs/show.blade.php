@@ -345,7 +345,11 @@
     <article class="rounded-[2rem] border border-slate-200 bg-white shadow-sm overflow-hidden">
       @if($blog->featured_image)
       <div class="max-h-[480px] overflow-hidden bg-slate-100">
-        <img src="{{ asset('public/uploads/blogs/'.$blog->featured_image) }}" alt="{{ $blog->title }}" class="h-full w-full object-cover">
+        <img src="{{ asset('public/uploads/blogs/'.$blog->featured_image) }}"
+             alt="{{ $blog->title }} - Findstudyroom"
+             title="{{ $blog->title }} - Findstudyroom Article"
+             class="h-full w-full object-cover"
+             loading="lazy">
       </div>
       @endif
 

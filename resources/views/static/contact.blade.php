@@ -96,7 +96,11 @@ $contactSchema = [
       </div>
       <div class="relative">
         <div class="overflow-hidden rounded-[2rem] shadow-2xl">
-          <img src="https://plus.unsplash.com/premium_photo-1675842663249-a8b70103dbaa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29udGFjdCUyMHVzfGVufDB8fDB8fHww" alt="Contact us" class="h-full w-full object-cover" />
+          <img src="https://plus.unsplash.com/premium_photo-1675842663249-a8b70103dbaa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y29udGFjdCUyMHVzfGVufDB8fDB8fHww"
+               alt="Contact Findstudyroom Team"
+               title="Contact Findstudyroom - Support &amp; Enquiries"
+               class="h-full w-full object-cover"
+               loading="lazy" />
         </div>
       </div>
     </div>

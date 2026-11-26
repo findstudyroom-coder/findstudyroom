@@ -22,7 +22,11 @@ use App\Services\ImageService;
       @forelse($tutors as $tutor)
       <a href="{{ url('/tutor/'.$tutor->public_slug) }}" class="group block overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
         <div class="h-56 overflow-hidden bg-gray-100">
-          <img src="{{ $tutor->image ? asset('public/uploads/tutors/'.$tutor->image) : ImageService::getTutorImage() }}" alt="{{ $tutor->full_name }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+          <img src="{{ $tutor->image ? asset('public/uploads/tutors/'.$tutor->image) : ImageService::getTutorImage() }}"
+               alt="{{ $tutor->full_name }} - Verified Tutor on Findstudyroom"
+               title="{{ $tutor->full_name }} - Expert Tutor"
+               class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+               loading="lazy">
         </div>
         <div class="p-5">
           <h2 class="text-xl font-semibold text-gray-900">{{ $tutor->full_name }}</h2>

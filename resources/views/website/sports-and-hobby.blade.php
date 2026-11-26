@@ -165,9 +165,11 @@
                     <div>
                         <a href="{{ $targetUrl }}" class="relative block h-52 bg-slate-900 overflow-hidden">
                             <img src="{{ $coaching->cover_image_url }}" 
-                                 alt="{{ $coaching->coaching_name }}"
+                                 alt="{{ $coaching->coaching_name }} - Martial Arts &amp; Sports Coaching"
+                                 title="{{ $coaching->coaching_name }} - Findstudyroom"
                                  onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=800&q=80';"
-                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90">
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
+                                 loading="lazy">
                             
                             <!-- Gradient overlay -->
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/25 to-transparent"></div>
@@ -191,8 +193,10 @@
                                 <div class="flex items-center gap-3">
                                     <img src="{{ $coaching->logo_url }}" 
                                          alt="{{ $coaching->coaching_name }} Logo" 
+                                         title="{{ $coaching->coaching_name }} Official Logo"
                                          onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name={{ urlencode($coaching->coaching_name) }}&background=0d9488&color=fff';"
-                                         class="w-12 h-12 rounded-xl object-cover border-2 border-white bg-white shadow-md">
+                                         class="w-12 h-12 rounded-xl object-cover border-2 border-white bg-white shadow-md"
+                                         loading="lazy">
                                     
                                     <div class="text-white">
                                         <div class="text-xs font-semibold text-slate-300 flex items-center gap-1">

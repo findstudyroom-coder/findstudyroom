@@ -107,13 +107,16 @@ if ($library->rating) {
           @endphp
           <div class="relative w-full max-w-full rounded-3xl overflow-hidden overflow-x-hidden group border border-border shadow-sm bg-gray-900 isolate">
             <!-- Blurred Background for any aspect ratio -->
-            <img id="mainImageBg" src="{{ $mainImgSrc }}" onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'" class="absolute inset-0 w-full h-full object-cover opacity-60 blur-xl scale-110">
+            <img id="mainImageBg" src="{{ $mainImgSrc }}" alt="{{ $library->name }} Background" title="{{ $library->name }}" onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'" class="absolute inset-0 w-full h-full object-cover opacity-60 blur-xl scale-110">
             
             <!-- Actual Image -->
             <img id="mainImage"
                  src="{{ $mainImgSrc }}"
+                 alt="{{ $library->name }} - Verified Study Library in {{ $library->city ?? ($library->district->name ?? 'India') }}"
+                 title="{{ $library->name }} - Verified Study Room &amp; Library"
                  onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'"
-                 class="relative w-full max-w-full h-60 sm:h-[400px] lg:h-[500px] object-contain transition-transform duration-700 group-hover:scale-105 z-0">
+                 class="relative w-full max-w-full h-60 sm:h-[400px] lg:h-[500px] object-contain transition-transform duration-700 group-hover:scale-105 z-0"
+                 loading="lazy">
                  
             <!-- Top Badges -->
             <div class="absolute top-3 sm:top-4 left-3 sm:left-4 flex flex-wrap gap-1.5 sm:gap-2 z-10">
@@ -146,9 +149,12 @@ if ($library->rating) {
               @if(!empty($allImages) && is_array($allImages))
                 @foreach($allImages as $index => $img)
                   <img src="{{ asset('storage/app/public/'.$img) }}"
+                       alt="{{ $library->name }} - Photo {{ $index + 1 }}"
+                       title="{{ $library->name }} - Image {{ $index + 1 }}"
                        onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'"
                        onclick="changeImage('{{ asset('storage/app/public/'.$img) }}'); window.currentGalleryIndex = {{ $index }};"
-                       class="h-16 w-24 sm:h-20 sm:w-32 object-cover rounded-xl cursor-pointer border-2 border-transparent hover:border-blue-500 hover:shadow-lg transition-all duration-300 shadow-sm flex-shrink-0">
+                       class="h-16 w-24 sm:h-20 sm:w-32 object-cover rounded-xl cursor-pointer border-2 border-transparent hover:border-blue-500 hover:shadow-lg transition-all duration-300 shadow-sm flex-shrink-0"
+                       loading="lazy">
                 @endforeach
               @endif
             </div>
@@ -419,8 +425,11 @@ if ($library->rating) {
           @foreach($library->images as $img)
           <div class="h-64 sm:h-72 rounded-3xl overflow-hidden shadow-sm border border-border cursor-pointer hover:opacity-90 transition-opacity" onclick="changeImage('{{ asset('storage/app/public/'.$img) }}')">
             <img src="{{ asset('storage/app/public/'.$img) }}" 
+                 alt="{{ $library->name }} - Photo {{ $loop->iteration }}"
+                 title="{{ $library->name }} - Gallery {{ $loop->iteration }}"
                  onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'"
-                 class="w-full h-full object-cover" />
+                 class="w-full h-full object-cover"
+                 loading="lazy" />
           </div>
           @endforeach
         </div>
@@ -428,19 +437,19 @@ if ($library->rating) {
         <!-- Fallback mock grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="h-64 sm:h-72 rounded-3xl overflow-hidden shadow-sm border border-border">
-            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Study Space Interior" title="Study Space Interior - Findstudyroom" class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div class="h-64 sm:h-72 rounded-3xl overflow-hidden shadow-sm border border-border">
-            <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80" alt="Peaceful Reading Hall" title="Peaceful Reading Hall - Findstudyroom" class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div class="h-64 sm:h-72 rounded-3xl overflow-hidden shadow-sm border border-border">
-            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=80" alt="Library Bookshelf & Study Area" title="Library Bookshelf - Findstudyroom" class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div class="h-64 sm:h-72 rounded-3xl overflow-hidden shadow-sm border border-border">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Discussion & Study Group Area" title="Group Study Area - Findstudyroom" class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div class="h-64 sm:h-72 rounded-3xl overflow-hidden shadow-sm border border-border">
-            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80" alt="Quiet Individual Study Cabin" title="Quiet Study Cabin - Findstudyroom" class="w-full h-full object-cover" loading="lazy" />
           </div>
         </div>
       @endif
@@ -465,7 +474,12 @@ if ($library->rating) {
         <div class="bg-white rounded-[20px] shadow-sm border border-border overflow-hidden group hover:shadow-md transition-all flex flex-col">
           <div class="relative h-44 shrink-0">
             <a href="{{ route('library.details', $nearLib->slug ?? $nearLib->id) }}" class="block w-full h-full">
-              <img src="{{ !empty($nearLib->images) && is_array($nearLib->images) && count($nearLib->images) > 0 ? asset('storage/app/public/'.$nearLib->images[0]) : ImageService::getLibraryImage() }}" onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <img src="{{ !empty($nearLib->images) && is_array($nearLib->images) && count($nearLib->images) > 0 ? asset('storage/app/public/'.$nearLib->images[0]) : ImageService::getLibraryImage() }}"
+                   alt="{{ $nearLib->name }} - Study Library in {{ $nearLib->district->name ?? 'Nearby' }}"
+                   title="{{ $nearLib->name }} - Findstudyroom"
+                   onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'"
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                   loading="lazy" />
             </a>
             <div class="absolute bottom-2 right-2 bg-black/80 text-white text-[11px] font-bold px-2.5 py-1 rounded-md backdrop-blur-sm">{{ $nearLib->price ? '₹'.$nearLib->price.'/mo' : 'Price N/A' }}</div>
           </div>
@@ -523,7 +537,12 @@ if ($library->rating) {
         <div class="bg-white rounded-[20px] shadow-sm border border-border overflow-hidden group hover:shadow-md transition-all flex flex-col">
           <div class="relative h-48 shrink-0">
             <a href="{{ route('library.details', $simLib->slug ?? $simLib->id) }}" class="block w-full h-full">
-              <img src="{{ !empty($simLib->images) && is_array($simLib->images) && count($simLib->images) > 0 ? asset('storage/app/public/'.$simLib->images[0]) : ImageService::getLibraryImage() }}" onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <img src="{{ !empty($simLib->images) && is_array($simLib->images) && count($simLib->images) > 0 ? asset('storage/app/public/'.$simLib->images[0]) : ImageService::getLibraryImage() }}"
+                   alt="{{ $simLib->name }} - Study Room"
+                   title="{{ $simLib->name }} - Findstudyroom"
+                   onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'"
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                   loading="lazy" />
             </a>
           </div>
           <div class="p-6 flex flex-col flex-grow">
@@ -575,7 +594,7 @@ if ($library->rating) {
         <!-- Small Card 1 -->
         <!-- <div class="bg-white rounded-xl shadow-sm border border-border p-3 flex items-center gap-4 hover:shadow-md transition-all cursor-pointer">
           <div class="w-14 h-14 rounded-lg overflow-hidden shrink-0">
-            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=150&q=80" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=150&q=80" alt="Noida Study Point" title="Noida Study Point - Findstudyroom" class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div>
             <h4 class="font-bold text-fg text-[13px] truncate">Noida Study Point</h4>
@@ -586,7 +605,7 @@ if ($library->rating) {
         <!-- Small Card 2 -->
         <!-- <div class="bg-white rounded-xl shadow-sm border border-border p-3 flex items-center gap-4 hover:shadow-md transition-all cursor-pointer">
           <div class="w-14 h-14 rounded-lg overflow-hidden shrink-0">
-            <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=150&q=80" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=150&q=80" alt="Vidya Premium Lounge" title="Vidya Premium Lounge - Findstudyroom" class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div>
             <h4 class="font-bold text-fg text-[13px] truncate">Vidya Premium Lounge</h4>
@@ -597,7 +616,7 @@ if ($library->rating) {
         <!-- Small Card 3 -->
         <!-- <div class="bg-white rounded-xl shadow-sm border border-border p-3 flex items-center gap-4 hover:shadow-md transition-all cursor-pointer">
           <div class="w-14 h-14 rounded-lg overflow-hidden shrink-0">
-            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=150&q=80" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=150&q=80" alt="Apex Reading Room" title="Apex Reading Room - Findstudyroom" class="w-full h-full object-cover" loading="lazy" />
           </div>
           <div>
             <h4 class="font-bold text-fg text-[13px] truncate">Apex Reading Room</h4>
@@ -771,7 +790,7 @@ function closeSuccessModal() {
 
     <!-- Image Display -->
     <div class="relative w-full max-w-5xl px-4 flex justify-center items-center h-[80vh]">
-        <img id="galleryMainImage" src="" class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-transform duration-300 scale-95">
+        <img id="galleryMainImage" src="" alt="Gallery Preview" title="Gallery Image Preview" class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-transform duration-300 scale-95">
     </div>
 
     <!-- Next Button -->

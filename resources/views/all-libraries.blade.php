@@ -157,9 +157,11 @@ $allLibDesc = 'Browse the best study libraries and study rooms near you. View ve
                     <!-- Image Container -->
                     <a href="{{ route('library.details',$lib->slug) }}" class="relative block overflow-hidden h-48 bg-gray-200">
                             <img src="{{ !empty($lib->images) && count($lib->images) > 0 ? asset('storage/app/public/'.$lib->images[0]) : $fallbackImage }}"
-                                alt="{{ $lib->name }}"
+                                alt="{{ $lib->name }} - Study Library in {{ $lib->location ?? ($lib->city ?? 'India') }}"
+                                title="{{ $lib->name }} - Findstudyroom"
                                 onerror="this.onerror=null;this.src='{{ $fallbackImage }}'"
-                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                loading="lazy">
                         
                         <!-- Verified Badge -->
                         @if($lib->is_verified)
@@ -395,7 +397,7 @@ function createLibraryCard(lib) {
     
     div.innerHTML = `
         <a href="/library/${lib.slug}" class="relative block overflow-hidden h-48 bg-gray-200">
-            <img src="${image}" alt="${lib.name}" onerror="this.onerror=null;this.src='${defaultImage}'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            <img src="${image}" alt="${lib.name} - Study Library" title="${lib.name} - Findstudyroom" onerror="this.onerror=null;this.src='${defaultImage}'" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
             <div class="absolute top-3 right-3 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
                 ✓ Verified
             </div>

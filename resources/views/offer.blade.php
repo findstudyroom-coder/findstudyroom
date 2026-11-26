@@ -260,8 +260,9 @@
           <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-900 border border-slate-200/50 group">
             <img src="https://www.cornell.edu/academics/assets/img/library/2024_1357_SH_0214-N.jpg" 
                  alt="Modern Indian study library reading hall with wooden cubicles, individual desk lamps, and focused students" 
+                 title="Modern Study Library - Findstudyroom Exclusive Offer"
                  class="w-full h-[380px] sm:h-[460px] object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out" 
-                 loading="eager">
+                 loading="lazy">
 
             <!-- Gradient bottom shade for text legibility -->
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-black/20 pointer-events-none"></div>

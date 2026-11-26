@@ -69,7 +69,11 @@ use App\Services\ImageService;
 
     <aside class="space-y-6">
       <div class="overflow-hidden rounded-3xl bg-white shadow-sm">
-        <img src="{{ $tutor->image ? asset('public/uploads/tutors/'.$tutor->image) : ImageService::getTutorImage() }}" alt="{{ $tutor->full_name }}" class="h-80 w-full object-cover">
+        <img src="{{ $tutor->image ? asset('public/uploads/tutors/'.$tutor->image) : ImageService::getTutorImage() }}"
+             alt="{{ $tutor->full_name }} - Expert Tutor on Findstudyroom"
+             title="{{ $tutor->full_name }} - Tutor Profile"
+             class="h-80 w-full object-cover"
+             loading="lazy">
       </div>
 
       <div class="rounded-3xl bg-white p-6 shadow-sm">

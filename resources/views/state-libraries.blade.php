@@ -122,9 +122,11 @@ $fallbackImg = 'https://images.unsplash.com/photo-1497366216548-37526070297c?aut
                 <div class="library-card bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-all flex flex-col">
                     <a href="{{ route('library.details', $lib->slug) }}" class="block relative h-48 bg-gray-200 overflow-hidden shrink-0">
                         <img src="{{ !empty($lib->images) && count($lib->images) > 0 ? asset('storage/app/public/'.$lib->images[0]) : $fallbackImg }}"
+                             alt="{{ $lib->name }} - Verified Library in {{ $state->name ?? 'State' }}"
+                             title="{{ $lib->name }} - Findstudyroom"
                              onerror="this.onerror=null;this.src='{{ $fallbackImg }}'"
-                             alt="{{ $lib->name }}"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             loading="lazy">
                         
                         <!-- Top Left Badges -->
                         <div class="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5">
@@ -219,9 +221,11 @@ $fallbackImg = 'https://images.unsplash.com/photo-1497366216548-37526070297c?aut
                 <div class="library-card bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group hover:shadow-md transition-all flex flex-col">
                     <a href="{{ route('library.details', $lib->slug) }}" class="block relative h-48 bg-gray-200 overflow-hidden shrink-0">
                         <img src="{{ !empty($lib->images) && count($lib->images) > 0 ? asset('storage/app/public/'.$lib->images[0]) : $fallbackImg }}"
+                             alt="{{ $lib->name }} - Verified Library in {{ $state->name ?? 'State' }}"
+                             title="{{ $lib->name }} - Findstudyroom"
                              onerror="this.onerror=null;this.src='{{ $fallbackImg }}'"
-                             alt="{{ $lib->name }}"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             loading="lazy">
                         
                         <!-- Top Left Badges -->
                         <div class="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5">

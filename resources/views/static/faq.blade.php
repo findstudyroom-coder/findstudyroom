@@ -64,7 +64,11 @@ $faqSchema = [
         <p class="text-lg text-gray-600 leading-relaxed">Get quick answers about booking tutors, finding libraries, and using Findstudyroom effectively.</p>
       </div>
       <div class="overflow-hidden rounded-[2rem] shadow-xl">
-        <img src="https://img.magnific.com/free-vector/tiny-people-sitting-standing-near-giant-faq_74855-7879.jpg?semt=ais_hybrid&w=740&q=80" alt="FAQ illustration" class="h-full w-full object-cover" />
+        <img src="https://img.magnific.com/free-vector/tiny-people-sitting-standing-near-giant-faq_74855-7879.jpg?semt=ais_hybrid&w=740&q=80"
+             alt="Findstudyroom FAQs"
+             title="Frequently Asked Questions - Findstudyroom"
+             class="h-full w-full object-cover"
+             loading="lazy" />
       </div>
     </div>
 

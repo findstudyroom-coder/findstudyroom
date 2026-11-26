@@ -137,9 +137,11 @@ $remainingDistricts = $districts->skip(8);
                     <!-- Image Area -->
                     <div class="relative h-44 bg-gray-200 overflow-hidden">
                         <img src="{{ !empty($lib->images) && count($lib->images) > 0 ? asset('storage/app/public/'.$lib->images[0]) : $fallbackImg }}"
+                             alt="{{ $lib->name }} - Study Library in {{ $district->name ?? 'District' }}"
+                             title="{{ $lib->name }} - Findstudyroom"
                              onerror="this.onerror=null;this.src='{{ $fallbackImg }}'"
-                             alt="{{ $lib->name }}"
-                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                             loading="lazy">
                         
                         <!-- Top Left Verified Badge -->
                         @if(($lib->is_verified))

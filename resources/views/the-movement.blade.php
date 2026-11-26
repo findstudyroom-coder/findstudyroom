@@ -43,6 +43,7 @@
             <img 
                 src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=2400&q=85" 
                 alt="The Movement Sanctuary Dojo" 
+                title="The Movement Sanctuary Dojo - Commando Martial Arts &amp; Fitness"
                 class="w-full h-full object-cover object-center"
                 style="opacity: 0.8;"
             >
@@ -486,7 +487,7 @@
                 <div class="glass-panel rounded-3xl overflow-hidden flex flex-col justify-between group">
                     <div>
                         <div class="h-44 bg-gradient-to-tr {{ $theme['gradient'] }} border-b border-slate-100 relative p-4 flex items-center justify-center overflow-hidden">
-                            <img src="{{ $inst->image_url }}" alt="{{ $inst->name }}" class="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500">
+                            <img src="{{ $inst->image_url }}" alt="{{ $inst->name }} - Instructor" title="{{ $inst->name }} - Commando Instructor" class="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:scale-105 transition duration-500" loading="lazy">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent"></div>
                             @if($inst->rank_badge)
                                 <span class="absolute top-3 right-3 px-3 py-1 rounded-full {{ $theme['rank_badge'] }} font-mono text-[10px] font-extrabold uppercase shadow-md">
@@ -751,7 +752,7 @@
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                     @forelse($galleries as $gal)
                         <div class="relative group rounded-2xl overflow-hidden aspect-[4/3] bg-slate-100 border border-slate-200 shadow-sm">
-                            <img src="{{ $gal->image_url }}" alt="{{ $gal->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <img src="{{ $gal->image_url }}" alt="{{ $gal->title }}" title="{{ $gal->title }} - Studio Gallery" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
                                 <span class="text-xs font-bold text-white">{{ $gal->title }}</span>
                             </div>

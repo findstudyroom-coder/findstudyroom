@@ -66,7 +66,11 @@ $aboutSchema = [
                 $img = asset('storage/' . $images[0]);
             }
           @endphp
-          <img src="{{ $img ?: 'https://plus.unsplash.com/premium_photo-1668383778557-d71c562fdb4b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YWJvdXQlMjB1c3xlbnwwfHwwfHx8MA%3D%3D' }}" alt="{{ $about->title ?? 'About' }}" class="h-full w-full object-cover" />
+          <img src="{{ $img ?: 'https://plus.unsplash.com/premium_photo-1668383778557-d71c562fdb4b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YWJvdXQlMjB1c3xlbnwwfHwwfHx8MA%3D%3D' }}"
+               alt="{{ $about->title ?? 'About Findstudyroom' }}"
+               title="{{ $about->title ?? 'About Findstudyroom - Platform for Libraries &amp; Students' }}"
+               class="h-full w-full object-cover"
+               loading="lazy" />
         </div>
       </div>
     </div>

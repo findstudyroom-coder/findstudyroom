@@ -80,8 +80,11 @@ if ($openingHours) {
             <!-- Image -->
             <img id="mainImage"
                  src="{{ !empty($library->images) && is_array($library->images) && count($library->images) > 0 ? asset('storage/app/public/'.$library->images[0]) : ImageService::getLibraryImage() }}"
+                 alt="{{ $library->name }} - Verified Study Library"
+                 title="{{ $library->name }} - Findstudyroom"
                  onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'"
-                 class="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105">
+                 class="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                 loading="lazy">
                  
             <!-- Top Badges -->
             <div class="absolute top-4 left-4 flex flex-wrap gap-2 z-10">
@@ -108,9 +111,12 @@ if ($openingHours) {
               @if(!empty($library->images) && is_array($library->images))
                 @foreach($library->images as $img)
                   <img src="{{ asset('storage/app/public/'.$img) }}"
+                       alt="{{ $library->name }} - Photo {{ $loop->iteration }}"
+                       title="{{ $library->name }} - Gallery {{ $loop->iteration }}"
                        onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'"
                        onclick="changeImage('{{ asset('storage/app/public/'.$img) }}')"
-                       class="h-20 w-32 object-cover rounded-xl cursor-pointer border-2 border-transparent hover:border-accent transition-all duration-300 shadow-sm flex-shrink-0">
+                       class="h-20 w-32 object-cover rounded-xl cursor-pointer border-2 border-transparent hover:border-accent transition-all duration-300 shadow-sm flex-shrink-0"
+                       loading="lazy">
                 @endforeach
               @endif
             </div>
@@ -351,9 +357,12 @@ if ($openingHours) {
           @foreach($library->images as $img)
           <div class="break-inside-avoid">
             <img src="{{ asset('storage/app/public/'.$img) }}" 
+                 alt="{{ $library->name }} - Gallery Photo {{ $loop->iteration }}"
+                 title="{{ $library->name }} - Photo {{ $loop->iteration }}"
                  onerror="this.onerror=null;this.src='{{ ImageService::getLibraryImage() }}'"
                  class="w-full rounded-3xl shadow-sm border border-border object-cover cursor-pointer hover:opacity-90 transition-opacity" 
-                 onclick="changeImage('{{ asset('storage/app/public/'.$img) }}')" />
+                 onclick="changeImage('{{ asset('storage/app/public/'.$img) }}')"
+                 loading="lazy" />
           </div>
           @endforeach
         </div>
@@ -361,19 +370,19 @@ if ($openingHours) {
         <!-- Fallback mock grid -->
         <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
           <div class="break-inside-avoid">
-            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" class="w-full rounded-3xl shadow-sm border border-border object-cover" />
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Study Space Interior" title="Study Space Interior - Findstudyroom" class="w-full rounded-3xl shadow-sm border border-border object-cover" loading="lazy" />
           </div>
           <div class="break-inside-avoid">
-            <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80" class="w-full rounded-3xl shadow-sm border border-border object-cover" />
+            <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80" alt="Peaceful Reading Hall" title="Peaceful Reading Hall - Findstudyroom" class="w-full rounded-3xl shadow-sm border border-border object-cover" loading="lazy" />
           </div>
           <div class="break-inside-avoid">
-            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=80" class="w-full rounded-3xl shadow-sm border border-border object-cover" />
+            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=80" alt="Library Bookshelf" title="Library Bookshelf - Findstudyroom" class="w-full rounded-3xl shadow-sm border border-border object-cover" loading="lazy" />
           </div>
           <div class="break-inside-avoid">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" class="w-full rounded-3xl shadow-sm border border-border object-cover" />
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" alt="Group Study Area" title="Group Study Area - Findstudyroom" class="w-full rounded-3xl shadow-sm border border-border object-cover" loading="lazy" />
           </div>
           <div class="break-inside-avoid">
-            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80" class="w-full rounded-3xl shadow-sm border border-border object-cover" />
+            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=800&q=80" alt="Study Cabin" title="Study Cabin - Findstudyroom" class="w-full rounded-3xl shadow-sm border border-border object-cover" loading="lazy" />
           </div>
         </div>
       @endif
@@ -408,7 +417,7 @@ if ($openingHours) {
         <!-- Card 1 -->
         <div class="bg-white rounded-[20px] shadow-sm border border-border overflow-hidden group hover:shadow-md transition-all flex flex-col">
           <div class="relative h-44 shrink-0">
-            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=500&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=500&q=80" alt="Noida Study Point" title="Noida Study Point - Findstudyroom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
             <div class="absolute bottom-2 right-2 bg-black/80 text-white text-[11px] font-bold px-2.5 py-1 rounded-md backdrop-blur-sm">₹1,200/mo</div>
           </div>
           <div class="p-5 flex flex-col flex-grow">
@@ -433,7 +442,7 @@ if ($openingHours) {
         <!-- Card 2 -->
         <div class="bg-white rounded-[20px] shadow-sm border border-border overflow-hidden group hover:shadow-md transition-all flex flex-col">
           <div class="relative h-44 shrink-0">
-            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&q=80" alt="Success Library Zone" title="Success Library Zone - Findstudyroom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
             <div class="absolute bottom-2 right-2 bg-black/80 text-white text-[11px] font-bold px-2.5 py-1 rounded-md backdrop-blur-sm">₹1,400/mo</div>
           </div>
           <div class="p-5 flex flex-col flex-grow">
@@ -454,7 +463,7 @@ if ($openingHours) {
         <!-- Card 3 -->
         <div class="bg-white rounded-[20px] shadow-sm border border-border overflow-hidden group hover:shadow-md transition-all flex flex-col">
           <div class="relative h-44 shrink-0">
-            <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=500&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=500&q=80" alt="Vidya Premium Lounge" title="Vidya Premium Lounge - Findstudyroom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
             <div class="absolute bottom-2 right-2 bg-black/80 text-white text-[11px] font-bold px-2.5 py-1 rounded-md backdrop-blur-sm">₹1,600/mo</div>
           </div>
           <div class="p-5 flex flex-col flex-grow">
@@ -475,7 +484,7 @@ if ($openingHours) {
         <!-- Card 4 -->
         <div class="bg-white rounded-[20px] shadow-sm border border-border overflow-hidden group hover:shadow-md transition-all flex flex-col">
           <div class="relative h-44 shrink-0">
-            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=500&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=500&q=80" alt="Apex Reading Room" title="Apex Reading Room - Findstudyroom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
             <div class="absolute bottom-2 right-2 bg-black/80 text-white text-[11px] font-bold px-2.5 py-1 rounded-md backdrop-blur-sm">₹1,100/mo</div>
           </div>
           <div class="p-5 flex flex-col flex-grow">
@@ -512,7 +521,7 @@ if ($openingHours) {
         <!-- Card 1 -->
         <div class="bg-white rounded-[20px] shadow-sm border border-border overflow-hidden group hover:shadow-md transition-all flex flex-col">
           <div class="relative h-48 shrink-0">
-            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80" alt="Target Study Hub" title="Target Study Hub - Findstudyroom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
           </div>
           <div class="p-6 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-3">
@@ -532,7 +541,7 @@ if ($openingHours) {
         <!-- Card 2 -->
         <div class="bg-white rounded-[20px] shadow-sm border border-border overflow-hidden group hover:shadow-md transition-all flex flex-col">
           <div class="relative h-48 shrink-0">
-            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80" alt="Focus Reading Library" title="Focus Reading Library - Findstudyroom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
           </div>
           <div class="p-6 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-3">
@@ -552,7 +561,7 @@ if ($openingHours) {
         <!-- Card 3 -->
         <div class="bg-white rounded-[20px] shadow-sm border border-border overflow-hidden group hover:shadow-md transition-all flex flex-col">
           <div class="relative h-48 shrink-0">
-            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="Ambition UPSC Zone" title="Ambition UPSC Zone - Findstudyroom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
           </div>
           <div class="p-6 flex flex-col flex-grow">
             <div class="flex items-center justify-between mb-3">

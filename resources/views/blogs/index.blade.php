@@ -17,7 +17,11 @@
         @if($blogs->first())
           <a href="{{ route('blogs.show', $blogs->first()->slug) }}" class="block rounded-3xl overflow-hidden border border-slate-200 transition hover:-translate-y-1 hover:shadow-xl">
             @if($blogs->first()->featured_image)
-              <img src="{{ asset('public/uploads/blogs/'.$blogs->first()->featured_image) }}" alt="{{ $blogs->first()->title }}" class="h-52 w-full object-cover">
+              <img src="{{ asset('public/uploads/blogs/'.$blogs->first()->featured_image) }}"
+                   alt="{{ $blogs->first()->title }} - Findstudyroom Blog"
+                   title="{{ $blogs->first()->title }} - Findstudyroom"
+                   class="h-52 w-full object-cover"
+                   loading="lazy">
             @else
               <div class="h-52 bg-slate-100"></div>
             @endif
@@ -49,7 +53,11 @@
           <a href="{{ route('blogs.show', $blog->slug) }}">
             <div class="h-64 overflow-hidden bg-slate-100">
               @if($blog->featured_image)
-                <img src="{{ asset('public/uploads/blogs/'.$blog->featured_image) }}" alt="{{ $blog->title }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+                <img src="{{ asset('public/uploads/blogs/'.$blog->featured_image) }}"
+                     alt="{{ $blog->title }} - Findstudyroom Blog"
+                     title="{{ $blog->title }} - Findstudyroom"
+                     class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                     loading="lazy">
               @endif
             </div>
           </a>

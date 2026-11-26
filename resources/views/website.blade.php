@@ -391,7 +391,11 @@ document.addEventListener('DOMContentLoaded', function() {
             @endphp
             <!-- State Card -->
             <a href="{{ route('libraries.state', $slug) }}" data-state-card class="group relative h-64 min-w-[280px] sm:min-w-[300px] snap-center rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300">
-                <img src="{{ $imgSrc }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="{{ $state->name }}">
+                <img src="{{ $imgSrc }}"
+                     alt="Study Libraries in {{ $state->name }} - Best Self Study Spaces"
+                     title="Study Libraries in {{ $state->name }} - Findstudyroom"
+                     class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                     loading="lazy">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                 <div class="absolute bottom-5 left-5 text-left w-full pr-5">
                     <h3 class="text-2xl font-bold text-white mb-1 truncate">{{ $state->name }}</h3>
@@ -460,8 +464,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             }
                         @endphp
                         <img src="{{ $imgSrc }}"
+                             alt="{{ $lib->name }} - Study Library in {{ $lib->location ?? ($lib->city ?? 'India') }}"
+                             title="{{ $lib->name }} - Top Rated Study Space &amp; Reading Room"
                              onerror="this.onerror=null;this.src='{{ $fallbackImage }}'"
-                             class="w-full h-full object-cover group-hover/card:scale-105 transition duration-500">
+                             class="w-full h-full object-cover group-hover/card:scale-105 transition duration-500"
+                             loading="lazy">
                     </a>
 
                     @if($lib->rating && $lib->rating >= 4.5)
@@ -531,7 +538,11 @@ document.addEventListener('DOMContentLoaded', function() {
       @foreach($tutors as $tutor)
       <a href="{{ url('/tutor/'.$tutor->public_slug) }}" class="group block overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
         <div class="h-48 overflow-hidden bg-gray-100">
-          <img src="{{ $tutor->image ? asset('public/uploads/tutors/'.$tutor->image) : ImageService::getTutorImage() }}" alt="{{ $tutor->full_name }}" class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+          <img src="{{ $tutor->image ? asset('public/uploads/tutors/'.$tutor->image) : ImageService::getTutorImage() }}"
+               alt="{{ $tutor->full_name }} - Verified Tutor on Findstudyroom"
+               title="{{ $tutor->full_name }} - Expert Tutor"
+               class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+               loading="lazy">
         </div>
         <div class="p-5">
           <h3 class="text-lg font-semibold text-gray-900">{{ $tutor->full_name }}</h3>
@@ -572,7 +583,11 @@ document.addEventListener('DOMContentLoaded', function() {
         <!-- Image Container -->
         <a href="{{ route('blogs.show', $blog->slug) }}" class="relative block h-56 bg-gray-100 overflow-hidden">
           @if($blog->featured_image)
-            <img src="{{ asset('public/uploads/blogs/'.$blog->featured_image) }}" alt="{{ $blog->title }}" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+            <img src="{{ asset('public/uploads/blogs/'.$blog->featured_image) }}"
+                 alt="{{ $blog->title }} - Educational &amp; Library Guide"
+                 title="{{ $blog->title }} - Findstudyroom Blog"
+                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                 loading="lazy">
           @else
             <div class="flex h-full items-center justify-center bg-gray-200 text-gray-500">No image</div>
           @endif
