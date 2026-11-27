@@ -136,6 +136,24 @@
                 </li>
                 @endcan
 
+                <li class="{{ request()->routeIs('coachings.admins.*') ? 'sub-active' : '' }}">
+                    <a href="{{ route('coachings.admins.index') }}">
+                        <i class="fas fa-users-cog" style="color: #38bdf8;"></i> Coaching Admins (Logins)
+                    </a>
+                </li>
+
+                <li class="{{ request()->routeIs('coachings.all-leads*') ? 'sub-active' : '' }}">
+                    <a href="{{ route('coachings.all-leads') }}" class="d-flex align-items-center justify-content-between">
+                        <span><i class="fas fa-chart-line" style="color: #10b981;"></i> Overall Leads &amp; CRM</span>
+                        @php
+                            $newLeadCount = \Illuminate\Support\Facades\Schema::hasTable('coaching_leads') ? \App\Models\CoachingLead::where('status', 'New')->count() : 0;
+                        @endphp
+                        @if($newLeadCount > 0)
+                            <span class="badge bg-warning text-dark rounded-pill ms-auto" style="font-size: 10px;">{{ $newLeadCount }} new</span>
+                        @endif
+                    </a>
+                </li>
+
                 <li class="{{ request()->routeIs('commando-classes.index') || request()->routeIs('commando-classes.edit') ? 'sub-active' : '' }}">
                     <a href="{{ route('commando-classes.index') }}">
                         <i class="fas fa-fist-raised" style="color: #ef4444;"></i> Core Disciplines

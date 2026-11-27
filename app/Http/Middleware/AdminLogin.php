@@ -19,6 +19,11 @@ class AdminLogin
     {
         
         if (Auth::check()) { 
+            $user = Auth::user();
+            // If user is exclusively a Coaching Admin, route them to their dedicated coaching dashboard
+            if ($user->isCoachingAdmin() && !$user->isSuperAdmin()) {
+                return redirect()->route('coaching.dashboard');
+            }
             return $next($request);
         }
         

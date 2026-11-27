@@ -18,6 +18,7 @@ class Admin extends Authenticatable
         'status',
         'password',
         'image',
+        'coaching_id',
     ];
 
     protected $hidden = [
@@ -28,5 +29,20 @@ class Admin extends Authenticatable
     public function libraries()
     {
         return $this->belongsToMany(Library::class, 'admin_library_access', 'admin_id', 'library_id');
+    }
+
+    public function coaching()
+    {
+        return $this->belongsTo(Coaching::class, 'coaching_id');
+    }
+
+    public function isCoachingAdmin(): bool
+    {
+        return !empty($this->coaching_id) || $this->hasRole('Coaching Admin');
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->hasRole('Super Admin') || ($this->role_id ?? 0) === 1;
     }
 }

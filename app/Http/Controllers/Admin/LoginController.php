@@ -65,6 +65,11 @@ class LoginController extends BaseController
                         // Store user's name and image in the session
                         $request->session()->put('admin.name', $preName);
                         $request->session()->put('admin.image', Storage::disk('public')->url($preImage));
+
+                        $authUser = Auth::user();
+                        if ($authUser->isCoachingAdmin() && !$authUser->isSuperAdmin()) {
+                            return redirect()->route('coaching.dashboard')->withSuccess(__('Logged in to Coaching Portal'));
+                        }
             
                         return redirect()->route('dashboard')->withSuccess(__('Logged in successfully'));
                     } else {

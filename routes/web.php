@@ -316,6 +316,16 @@ Route::get('/movement-studio', [\App\Http\Controllers\Website\WebsiteController:
 Route::get('/tutor/{identifier}', [WebsiteController::class, 'tutorDetails'])->name('tutor.details');
 Route::get('/libraries/load-more', [WebsiteController::class, 'loadMoreLibraries'])->name('libraries.loadMore');
 Route::get('/libraries/by-state', [WebsiteController::class, 'getStateLibraries'])->name('libraries.byState');
+
+// 📌 Static file route fallback for /uploads/ on shared hosting environments
+Route::get('/uploads/{path}', function ($path) {
+    $cleanPath = ltrim(preg_replace('/^file:\/\/\/?/i', '', $path), '/');
+    $fullPath = public_path('uploads/' . $cleanPath);
+    if (file_exists($fullPath) && is_file($fullPath)) {
+        return response()->file($fullPath);
+    }
+    abort(404);
+})->where('path', '.*');
 Route::controller(LoginController::class)->group(function () {
     // Route::get('/', 'create')->name('admin.user.login');
     Route::get('/login', 'create')->name('admin.user.login');
@@ -385,6 +395,13 @@ Route::get('/bookings', [UserController::class, 'bookingindex'])->name('booking.
 // 📌 Centralized Coaching Management (Master Coachings CRUD: The Movement, The Achievers, etc.)
 Route::resource('coachings', \App\Http\Controllers\Admin\CoachingController::class);
 Route::post('/coachings/{id}/toggle-status', [\App\Http\Controllers\Admin\CoachingController::class, 'toggleStatus'])->name('coachings.toggle-status');
+
+// 📌 Coaching Admins Management (Main Admin creates logins, resets passwords, toggles access)
+Route::resource('coachings-admins', \App\Http\Controllers\Admin\CoachingAdminManagementController::class)->names('coachings.admins');
+Route::post('/coachings-admins/{id}/toggle-status', [\App\Http\Controllers\Admin\CoachingAdminManagementController::class, 'toggleStatus'])->name('coachings.admins.toggle-status');
+Route::post('/coachings-admins/{id}/reset-password', [\App\Http\Controllers\Admin\CoachingAdminManagementController::class, 'resetPassword'])->name('coachings.admins.reset-password');
+Route::get('/coachings-all-leads', [\App\Http\Controllers\Admin\CoachingAdminManagementController::class, 'allLeads'])->name('coachings.all-leads');
+Route::get('/coachings-all-leads-export', [\App\Http\Controllers\Admin\CoachingAdminManagementController::class, 'exportAllLeads'])->name('coachings.all-leads.export');
 
 // 📌 Commando Classes CRUD (Disciplines Curriculum - Standalone, No Library Dependency)
 Route::resource('commando-classes', \App\Http\Controllers\Admin\CommandoClassController::class);
@@ -622,4 +639,40 @@ Route::put('/seats/{id}/update',           [SeatController::class, 'update'])   
 Route::get('/seats/available',             [SeatController::class, 'available']) ->name('seats.available');
 
     });
+
+// ============================================================================
+// 🥋 SEPARATE COACHING INSTITUTE ADMIN PANEL
+// ============================================================================
+
+// 📌 Public Coaching Login & Logout
+Route::get('/coaching/login', [\App\Http\Controllers\CoachingAdmin\AuthController::class, 'showLogin'])->name('coaching.login');
+Route::post('/coaching/login', [\App\Http\Controllers\CoachingAdmin\AuthController::class, 'login'])->name('coaching.login.post');
+Route::get('/coaching/logout', [\App\Http\Controllers\CoachingAdmin\AuthController::class, 'logout'])->name('coaching.logout');
+
+// 📌 Authenticated Coaching Admin Portal (Isolated Multi-Tenant Access)
+Route::middleware(['auth', 'coaching.admin'])->prefix('coaching')->name('coaching.')->group(function () {
+    // 📊 Dedicated Dashboard & Analytics
+    Route::get('/dashboard', [\App\Http\Controllers\CoachingAdmin\DashboardController::class, 'index'])->name('dashboard');
+
+    // 🏫 Profile Management (Logo, Description, Fees, Facilities, Images)
+    Route::get('/profile', [\App\Http\Controllers\CoachingAdmin\ProfileController::class, 'edit'])->name('profile');
+    Route::put('/profile/update', [\App\Http\Controllers\CoachingAdmin\ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/remove-gallery', [\App\Http\Controllers\CoachingAdmin\ProfileController::class, 'removeGalleryImage'])->name('profile.remove-gallery');
+
+    // 🎯 Lead CRM (Enquiries, Status Updates, Offline Lead Addition, Export)
+    Route::get('/leads', [\App\Http\Controllers\CoachingAdmin\LeadController::class, 'index'])->name('leads.index');
+    Route::post('/leads/store', [\App\Http\Controllers\CoachingAdmin\LeadController::class, 'store'])->name('leads.store');
+    Route::post('/leads/{id}/status', [\App\Http\Controllers\CoachingAdmin\LeadController::class, 'updateStatus'])->name('leads.updateStatus');
+    Route::put('/leads/{id}', [\App\Http\Controllers\CoachingAdmin\LeadController::class, 'update'])->name('leads.update');
+    Route::delete('/leads/{id}', [\App\Http\Controllers\CoachingAdmin\LeadController::class, 'destroy'])->name('leads.destroy');
+    Route::get('/leads-export', [\App\Http\Controllers\CoachingAdmin\LeadController::class, 'exportCsv'])->name('leads.export');
+
+    // 🥋 Coaching Specific Curriculum & Content (Classes, Instructors, Schedules, Plans, Galleries)
+    Route::get('/classes', [\App\Http\Controllers\CoachingAdmin\CoachingContentController::class, 'classes'])->name('classes.index');
+    Route::get('/instructors', [\App\Http\Controllers\CoachingAdmin\CoachingContentController::class, 'instructors'])->name('instructors.index');
+    Route::get('/schedules', [\App\Http\Controllers\CoachingAdmin\CoachingContentController::class, 'schedules'])->name('schedules.index');
+    Route::get('/plans', [\App\Http\Controllers\CoachingAdmin\CoachingContentController::class, 'plans'])->name('plans.index');
+    Route::get('/gallery', [\App\Http\Controllers\CoachingAdmin\CoachingContentController::class, 'gallery'])->name('gallery.index');
+});
+
 

@@ -118,8 +118,11 @@
                         <div class="text-muted small mt-1">Leave empty to keep current photo. Supported: JPG, PNG, WEBP.</div>
 
                         <div class="mt-3">
-                            <label class="form-label text-muted small">Or Enter External Image URL</label>
-                            <input type="url" name="image" id="imageUrlInput" value="{{ old('image', $gallery->image) }}" class="form-control bg-dark border-secondary text-white">
+                            <label class="form-label text-muted small">Or Enter External Image URL / Path (Optional)</label>
+                            @php
+                                $cleanExistingImage = preg_replace('/^file:\/\/\/?/i', '', $gallery->image ?? '');
+                            @endphp
+                            <input type="text" name="image" id="imageUrlInput" value="{{ old('image', $cleanExistingImage) }}" class="form-control bg-dark border-secondary text-white" placeholder="https://images.unsplash.com/... or uploads/commando/gallery/...">
                         </div>
                     </div>
 
@@ -172,8 +175,10 @@ document.getElementById('imageFileInput').addEventListener('change', function(e)
 });
 
 document.getElementById('imageUrlInput').addEventListener('input', function(e) {
-    if (this.value.trim() !== '') {
-        document.getElementById('imagePreview').src = this.value.trim();
+    let clean = this.value.trim().replace(/^file:\/\/\/?/i, '');
+    this.value = clean;
+    if (clean !== '') {
+        document.getElementById('imagePreview').src = clean.startsWith('http') ? clean : ('/' + clean.replace(/^\/+/, ''));
     }
 });
 </script>

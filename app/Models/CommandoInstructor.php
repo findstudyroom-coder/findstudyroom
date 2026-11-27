@@ -107,10 +107,12 @@ class CommandoInstructor extends Model
             return 'https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=400&q=80';
         }
 
-        if (str_starts_with($this->image, 'http://') || str_starts_with($this->image, 'https://')) {
-            return $this->image;
+        $image = ltrim(preg_replace('/^file:\/\/\/?/i', '', trim($this->image)), '/');
+
+        if (str_starts_with($image, 'http://') || str_starts_with($image, 'https://')) {
+            return $image;
         }
 
-        return asset($this->image);
+        return asset($image);
     }
 }

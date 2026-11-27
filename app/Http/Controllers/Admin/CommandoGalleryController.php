@@ -96,6 +96,8 @@ class CommandoGalleryController extends Controller
             }
             $file->move($destination, $filename);
             $validated['image'] = 'uploads/commando/gallery/' . $filename;
+        } elseif (!empty($validated['image'])) {
+            $validated['image'] = ltrim(preg_replace('/^file:\/\/\/?/i', '', trim($validated['image'])), '/');
         }
 
         if (empty($validated['image'])) {
@@ -160,7 +162,9 @@ class CommandoGalleryController extends Controller
             }
 
             $validated['image'] = 'uploads/commando/gallery/' . $filename;
-        } elseif (empty($validated['image'])) {
+        } elseif (!empty($validated['image'])) {
+            $validated['image'] = ltrim(preg_replace('/^file:\/\/\/?/i', '', trim($validated['image'])), '/');
+        } else {
             $validated['image'] = $gallery->image;
         }
 

@@ -36,10 +36,11 @@ class Coaching extends Model
         if (!$this->logo) {
             return 'https://ui-avatars.com/api/?name=' . urlencode($this->coaching_name) . '&background=0ea5e9&color=fff';
         }
-        if (str_starts_with($this->logo, 'http://') || str_starts_with($this->logo, 'https://')) {
-            return $this->logo;
+        $logo = ltrim(preg_replace('/^file:\/\/\/?/i', '', trim($this->logo)), '/');
+        if (str_starts_with($logo, 'http://') || str_starts_with($logo, 'https://')) {
+            return $logo;
         }
-        return asset($this->logo);
+        return asset($logo);
     }
 
     public function getCoverImageUrlAttribute()
@@ -47,10 +48,11 @@ class Coaching extends Model
         if (!$this->cover_image) {
             return 'https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1200&q=80';
         }
-        if (str_starts_with($this->cover_image, 'http://') || str_starts_with($this->cover_image, 'https://')) {
-            return $this->cover_image;
+        $cover = ltrim(preg_replace('/^file:\/\/\/?/i', '', trim($this->cover_image)), '/');
+        if (str_starts_with($cover, 'http://') || str_starts_with($cover, 'https://')) {
+            return $cover;
         }
-        return asset($this->cover_image);
+        return asset($cover);
     }
 
     public function classes()
@@ -81,5 +83,20 @@ class Coaching extends Model
     public function galleries()
     {
         return $this->hasMany(CommandoGallery::class, 'coaching_id');
+    }
+
+    public function admins()
+    {
+        return $this->hasMany(Admin::class, 'coaching_id');
+    }
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class, 'coaching_id');
+    }
+
+    public function leads()
+    {
+        return $this->hasMany(CoachingLead::class, 'coaching_id');
     }
 }

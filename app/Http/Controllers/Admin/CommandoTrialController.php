@@ -52,6 +52,24 @@ class CommandoTrialController extends Controller
             'notes'         => 'Online trial booking submitted via ' . $coachingName . ' page',
         ]);
 
+        // Also record in CoachingLead CRM
+        try {
+            if (\Illuminate\Support\Facades\Schema::hasTable('coaching_leads')) {
+                \App\Models\CoachingLead::create([
+                    'coaching_id'       => $coachingId,
+                    'student_name'      => trim($request->name),
+                    'phone'             => trim($request->phone),
+                    'email'             => $request->input('email'),
+                    'course_interested' => $discipline,
+                    'slot'              => $formattedSlot,
+                    'enquiry_date'      => $trialDate,
+                    'status'            => \App\Models\CoachingLead::STATUS_NEW,
+                    'notes'             => 'Online trial booking submitted via ' . $coachingName . ' page (' . $formattedSlot . ')',
+                    'source'            => 'Website Trial Form',
+                ]);
+            }
+        } catch (\Throwable $e) {}
+
         if ($request->ajax() || $request->wantsJson()) {
             return response()->json([
                 'status'  => 'success',
